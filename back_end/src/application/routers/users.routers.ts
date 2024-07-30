@@ -2,10 +2,8 @@ import * as express from 'express';
 import IUsersController from 'src/interface/controllers/users.controllers.js';
 import TYPES from '../config/types.js';
 import { container } from '../config/dependencies.config.js';
-import logger from '../config/logger.config.js';
 
 export default class UsersRouters {
-    // RUN not OK
     private controller: IUsersController = container.get<IUsersController>(TYPES.controller.IUsersController);
 
     public router = express.Router();
