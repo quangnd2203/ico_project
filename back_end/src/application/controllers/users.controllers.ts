@@ -18,7 +18,6 @@ export default class UsersController implements IUsersController {
             const response = container.get<ICreateUserMapper>(TYPES.mappers.CreateUserMapper).toResponse(user);
             return NetworkResponse.success<CreateUserDto>(response);
         } catch (e) {
-            console.log(e);
             return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'create_user_error');
         }
     }

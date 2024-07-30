@@ -4,3 +4,4 @@ package-lock.json
 .database
 yarn.lock
 .adminjs
+.logs
