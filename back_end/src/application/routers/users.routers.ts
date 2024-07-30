@@ -1,19 +1,22 @@
 import * as express from 'express';
 import IUsersController from 'src/interface/controllers/users.controllers.js';
-import UsersController from '../controllers/users.controllers.js';
-import CreateUserUseCase from 'src/infrastructure/usercases/create_user.usercase.js';
-import UsersRepository from 'src/infrastructure/repositories/users.repositories.js';
+import TYPES from '../config/types.js';
+import { container } from '../config/dependencies.config.js';
 
-const userRouters = express.Router();
+export default class UsersRouters {
+    // RUN not OK
+    private controller: IUsersController = container.get<IUsersController>(TYPES.controller.IUsersController);
 
-const controller: IUsersController = new UsersController(
-    new CreateUserUseCase(
-        new UsersRepository(),
-    ),
-);
+    public router = express.Router();
 
-userRouters.post('/', async (req, res) => {
-    controller.create(req.body).then((value) => res.status(value.code).send(value));
-});
+    public getRouters() {
+        this.createRoutes();
+        return this.router;
+    }
 
-export default userRouters;
+    private createRoutes(){
+        this.router.post('/', async (req, res) => {
+            this.controller.create(req.body).then((value) => res.status(value.code).send(value));
+        });
+    }
+}

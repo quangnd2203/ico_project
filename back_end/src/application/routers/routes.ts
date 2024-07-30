@@ -1,18 +1,14 @@
 import * as express from 'express';
-import userRouters from './users.routers.js';
-const router = express.Router();
+import UsersRouters from './users.routers.js';
 
-const routes = [
-    {
-        path: '/users',
-        route: userRouters,
+export default class Routes {
+    public router = express.Router();
+
+    constructor() {
+        this.router.use('/users', new UsersRouters().getRouters());
     }
-];
 
-routes.forEach(
-    (route) => {
-        router.use(route.path, route.route);
+    public getRouters() {
+        return this.router;
     }
-);
-
-export default router;
+}

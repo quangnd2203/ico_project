@@ -1,14 +1,11 @@
 import * as dotenv from 'dotenv';
-import apiService from './services/api.service.js';
-import {connect as connectDatabase} from './services/database.service.js';
+import { inject } from './application/config/dependencies.config.js';
+import createAPI from './application/config/api.config.js';
 
+inject();
 
 dotenv.config();
 
-connectDatabase().then((connected) => {
-    if(connected){
-        apiService.listen(process.env.SERVER_PORT, () => {
-            console.log(`Server is up and running on port: ${process.env.SERVER_PORT}`);
-        });
-    }
+createAPI().listen(process.env.SERVER_PORT, () => {
+    console.log(`Server running on port ${process.env.SERVER_PORT}`);
 });
