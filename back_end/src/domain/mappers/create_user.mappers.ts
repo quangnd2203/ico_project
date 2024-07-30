@@ -10,6 +10,8 @@ export default class CreateUserMapper implements ICreateUserMapper {
         return new CreateUserDto(
             entity.id,
             entity.name,
+            entity.createdAt,
+            entity.updatedAt,
         );
     }
 
@@ -17,6 +19,8 @@ export default class CreateUserMapper implements ICreateUserMapper {
         return new User(
             dto.id,
             dto.name,
+            dto.createdAt,
+            dto.updatedAt,
         );
     }
 

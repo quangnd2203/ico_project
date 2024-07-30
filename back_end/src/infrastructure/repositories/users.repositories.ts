@@ -15,6 +15,7 @@ export default class UsersRepository implements IUsersRepository {
         const user = container.get<ICreateUserMapper>(TYPES.mappers.CreateUserMapper).toDomain(request);
         const userModel = new UserModel(user);
         await userModel.save();
+        console.log(userModel.toObject());
         return userModel.toObject();
     }
 }
