@@ -1,0 +1,52 @@
+{
+    "/api/users": {
+        "post": {
+            "tags": [
+                "users"
+            ],
+            "summary": "Create a new user",
+            "description": "Create a new user",
+            "operationId": "createUser",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "body",
+                    "description": "User object",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "John Doe"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "examples": {
+                        "application/json": {
+                            "code": 200,
+                            "message": null,
+                            "data": {
+                                "id": "66a990f9351bd3041037330a",
+                                "name": "John Doe",
+                                "createdAt": "2022-01-01T00:00:00.000Z",
+                                "updatedAt": "2022-01-01T00:00:00.000Z"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

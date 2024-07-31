@@ -3,13 +3,17 @@ import { inject } from './application/config/dependencies.config.js';
 import createAPI from './application/config/api.config.js';
 import connectDatabase from './application/config/database.config.js';
 import logger from './application/config/logger.config.js';
+import initSwagger from './application/config/swagger.js';
 
-inject();
+initSwagger().then(() => {
 
-dotenv.config();
+    inject();
 
-connectDatabase();
+    dotenv.config();
 
-createAPI().listen(process.env.SERVER_PORT, () => {
-    logger.info(`Server running on port ${process.env.SERVER_PORT}`);
+    connectDatabase();
+
+    createAPI().listen(process.env.SERVER_PORT, () => {
+        logger.info(`Server running on port ${process.env.SERVER_PORT}`);
+    });
 });
