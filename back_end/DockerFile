@@ -1,9 +1,0 @@
-FROM node:slim
-
-WORKDIR /app
-
-COPY package*.json ./
-
-WORKDIR /app
-
-EXPOSE 3000
