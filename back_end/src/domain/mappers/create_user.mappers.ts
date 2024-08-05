@@ -25,5 +25,3 @@ export default class CreateUserMapper implements ICreateUserMapper {
     }
 
 }
-
-export {CreateUserDto, User};

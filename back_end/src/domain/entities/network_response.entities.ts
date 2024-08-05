@@ -2,15 +2,15 @@ class NetworkResponse<T> {
 
     public code: STATUS_CODE;
     public message?: string;
-    public data?: T;
+    public response?: T;
 
     static fromErrors: <T>(code: STATUS_CODE, error: string) => NetworkResponse<T>;
     static success: <T>(data:any, message?: string) => NetworkResponse<T>;
 
-    constructor(code: STATUS_CODE, message?: string, data?: T) {
+    constructor(code: STATUS_CODE, message?: string, response?: T) {
         this.code = code;
         this.message = message;
-        this.data = data;
+        this.response = response;
     }
 }
 
@@ -22,11 +22,11 @@ NetworkResponse.fromErrors = function <T>(code: STATUS_CODE, error: string) {
     );
 }
 
-NetworkResponse.success = function <T>(data: T, message?: string) {
+NetworkResponse.success = function <T>(response: T, message?: string) {
     return new NetworkResponse<T>(
         STATUS_CODE.success,
         message,
-        data,
+        response,
     );
 }
 
