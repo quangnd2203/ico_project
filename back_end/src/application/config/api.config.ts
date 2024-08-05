@@ -13,6 +13,12 @@ export default function createAPI(): Application {
     api.use(express.json());
     api.use(express.urlencoded({ extended: true }));
     api.use(cors());
+    api.use((req, res, next) => {
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
+        res.header('Access-Control-Expose-Headers', 'Content-Range');
+        next();
+    });
     api.options('*', cors());
     api.use(accessInfoMiddleware);
     api.use(responseInfoMiddleware);

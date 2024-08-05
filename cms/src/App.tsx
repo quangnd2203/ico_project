@@ -12,7 +12,6 @@ export const App = () => (
         authProvider={authProvider}
     >
         <Resource name='users' list={ListGuesser}></Resource>
-        <Resource name='users' create={Create}></Resource>
     </Admin>
 );
 

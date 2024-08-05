@@ -27,13 +27,11 @@ export default class UsersController implements IUsersController {
         }
     }
 
-    async getAll(request: SearchRequestDto): Promise<NetworkResponse<PageResponseDto<CreateUserDto>>>{
+    async getAll(request: SearchRequestDto): Promise<NetworkResponse<CreateUserDto[]>>{
         try{
             const users = await this.getUsersUseCase.execute(request);
             const response = container.get<IGetUsersMapper>(TYPES.mappers.GetUsersMapper).toResponse(users);
-            return NetworkResponse.success<PageResponseDto<CreateUserDto>>(
-                new PageResponseDto<CreateUserDto>(response, request.page, request.limit, response.length)
-            );
+            return NetworkResponse.success<CreateUserDto[]>(response);
         }catch(e){
             return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'get_users_error');
         }

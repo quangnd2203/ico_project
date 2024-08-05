@@ -21,7 +21,15 @@ export default class UsersRouters {
             });
         });
         this.router.get('/', async (req, res) => {
-            this.controller.getAll(req.query as unknown as SearchRequestDto).then((value) => {
+            res.set('Content-Range', `users 2`);
+            const query = new SearchRequestDto(
+                req.query.keyword as string,
+                req.query.page as unknown as number,
+                req.query.limit as unknown as number,
+                req.query.sortField as unknown as string,
+                req.query.sortOrder as string
+            );
+            this.controller.getAll(query).then((value) => {
                 res.status(value.code).send(value);
             });  
         })

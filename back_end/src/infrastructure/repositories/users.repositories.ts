@@ -20,12 +20,21 @@ export default class UsersRepository implements IUsersRepository {
     }
 
     async getAll(request: SearchRequestDto): Promise<User[]> {
-        const listUsers = await UserModel.find({
-            name: {
+        const query = {};
+        if (request.keyword) {
+            query['name'] = {
                 $regex: request.keyword,
                 $options: 'i'
             }
-        }).skip((request.page - 1) * request.limit).limit(request.limit);
+        }
+        const sort = {};
+        if (request.sortField) {
+            sort[request.sortField] = request.sortOrder === 'ASC' ? 1 : -1;
+        }
+        const listUsers = await UserModel.find(query)
+            .skip((request.page - 1) * request.limit)
+            .limit(request.limit)
+            .sort(sort);
         return listUsers;
     }
 }
