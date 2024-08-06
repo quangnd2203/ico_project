@@ -1,5 +1,3 @@
-import GetUsersMapper from "src/domain/mappers/get_users.mappers.js";
-
 const TYPES = {
     controller: {
         IUsersController: Symbol.for('IUsersController'),
@@ -7,13 +5,16 @@ const TYPES = {
     useCases: {
         ICreateUserUseCase: Symbol.for('ICreateUserUseCase'),
         IGetUsersUseCase: Symbol.for('IGetUsersUseCase'),
+        IGetUserUseCase: Symbol.for('IGetUserUseCase'),
+        IDeleteUserUsecase: Symbol.for('IDeleteUserUsecase'),
+        IUpdateUserUsecase: Symbol.for('IUpdateUserUsecase'),
     },
     repositories: {
         IUsersRepository: Symbol.for('IUsersRepository'),
     },
     mappers: {
-        CreateUserMapper: Symbol.for('CreateUserMapper'),
-        GetUsersMapper: Symbol.for('GetUsersMapper'),
+        IUserMapper: Symbol.for('IUserMapper'),
+        IGetUsersMapper: Symbol.for('IGetUsersMapper'),
     },
 };
 

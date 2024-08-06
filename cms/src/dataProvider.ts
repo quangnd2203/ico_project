@@ -25,14 +25,17 @@ export const dataProvider: DataProvider = {
             sortOrder: params.sort?.order 
         };
         const response = await apiClient.get(`/${resource}`, { params: query });
-        console.log(response);
         return {
             data: response.data.response.data,
             total: response.data.response.total,
         };
     },
-    create: (userId: String) => {
-        return fetch(`/api/users/${userId}`, { method: 'POST' })
-            .then(response => response.json());
+    getOne: async (resource, params) => {
+        const response = await apiClient.get(`/${resource}/${params.id}`);
+        return { data: response.data.response };
+    },
+    create: async (resource, params) => {
+        const response = await apiClient.post(`/${resource}`, params.data);
+        return { data: response.data.response };
     },
 }

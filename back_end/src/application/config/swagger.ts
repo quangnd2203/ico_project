@@ -2,6 +2,7 @@ import { join } from 'path';
 import * as fs from 'fs';
 
 export default async function initSwagger() {
+    console.log('Combining swagger files...');
 
     const basePath = 'swagger/base.json';
     const base = JSON.parse(fs.readFileSync(basePath, 'utf8'));

@@ -1,7 +1,7 @@
 import { injectable, inject} from "inversify";
 import "reflect-metadata";
 
-import ICreateUserUseCases from "src/interface/usercases/users/create_user.usecases.js";
+import ICreateUserUseCases from "src/interface/usercases/users/create_user.usecase.js";
 import IUsersRepository from "src/interface/repositories/users.repositories.js";
 import TYPES from "src/application/config/types.js";
 import CreateUserDto from "src/domain/dtos/create_user.dtos.js";

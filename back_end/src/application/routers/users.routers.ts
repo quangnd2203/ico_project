@@ -33,5 +33,20 @@ export default class UsersRouters {
                 res.status(value.code).send(value);
             });  
         })
+        this.router.get('/:id', async (req, res) => {
+            this.controller.get(req.params.id).then((value) => {
+                res.status(value.code).send(value);
+            });
+        });
+        this.router.delete('/:id', async (req, res) => {
+            this.controller.delete(req.params.id).then((value) => {
+                res.status(value.code).send(value);
+            });
+        });
+        this.router.put('/:id', async (req, res) => {
+            this.controller.update(req.params.id, req.body).then((value) => {
+                res.status(value.code).send(value);
+            });
+        });
     }
 }

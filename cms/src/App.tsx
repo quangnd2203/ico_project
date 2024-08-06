@@ -1,8 +1,11 @@
 
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser, Create } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { Layout } from './Layout';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
+import CreateUser from './components/users/Create.Users';
+import ListUsers from './components/users/List.Users';
+import EditUser from './components/users/Edit.Users';
 
 
 export const App = () => (
@@ -11,7 +14,7 @@ export const App = () => (
         dataProvider={dataProvider}
         authProvider={authProvider}
     >
-        <Resource name='users' list={ListGuesser}></Resource>
+        <Resource name='users' create={CreateUser} list={ListUsers} edit={EditUser}></Resource>
     </Admin>
 );
 

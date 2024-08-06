@@ -37,12 +37,232 @@
                         "application/json": {
                             "code": 200,
                             "message": null,
-                            "data": {
+                            "response": {
                                 "id": "66a990f9351bd3041037330a",
                                 "name": "John Doe",
                                 "createdAt": "2022-01-01T00:00:00.000Z",
                                 "updatedAt": "2022-01-01T00:00:00.000Z"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "get": {
+            "tags": [
+                "users"
+            ],
+            "summary": "Get all users",
+            "description": "Get all users",
+            "operationId": "getUsers",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                    "name": "keyword",
+                    "in": "query",
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                {
+                    "name": "page",
+                    "in": "query",
+                    "type": "integer",
+                    "example": 1
+                },
+                {
+                    "name": "limit",
+                    "in": "query",
+                    "type": "integer",
+                    "example": 10
+                },
+                {
+                    "name": "sortField",
+                    "in": "query",
+                    "type": "string",
+                    "example": "name"
+                },
+                {
+                    "name": "sortOrder",
+                    "in": "query",
+                    "type": "string",
+                    "example": "asc"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "examples": {
+                        "application/json": {
+                            "code": 200,
+                            "message": null,
+                            "response": {
+                                "data": [
+                                    {
+                                        "id": "66a990f9351bd3041037330a",
+                                        "name": "John Doe",
+                                        "createdAt": "2022-01-01T00:00:00.000Z",
+                                        "updatedAt": "2022-01-01T00:00:00.000Z"
+                                    }
+                                ],
+                                "page": 1,
+                                "limit": 10,
+                                "total": 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/users/{id}": {
+        "get": {
+            "tags": [
+                "users"
+            ],
+            "summary": "Get a user by ID",
+            "description": "Retrieve a user by their ID",
+            "operationId": "getUserById",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the user to retrieve",
+                    "schema": {
+                        "type": "string",
+                        "example": "66a990f9351bd3041037330a"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "examples": {
+                        "application/json": {
+                            "code": 200,
+                            "message": null,
+                            "response": {
+                                "id": "66a990f9351bd3041037330a",
+                                "name": "John Doe",
+                                "createdAt": "2022-01-01T00:00:00.000Z",
+                                "updatedAt": "2022-01-01T00:00:00.000Z"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "User not found",
+                    "examples": {
+                        "application/json": {
+                            "code": 404,
+                            "message": "User not found"
+                        }
+                    }
+                }
+            }
+        },
+        "patch": {
+            "tags": [
+                "users"
+            ],
+            "summary": "update user",
+            "description": "update user",
+            "operationId": "updateUser",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the user to retrieve",
+                    "schema": {
+                        "type": "string",
+                        "example": "66a990f9351bd3041037330a"
+                    }
+                },
+                {
+                    "in": "body",
+                    "name": "body",
+                    "description": "User object",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "John Doe"
+                            }
+                        }
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "examples": {
+                        "application/json": {
+                            "code": 200,
+                            "message": null,
+                            "response": {
+                                "id": "66a990f9351bd3041037330a",
+                                "name": "John Doe",
+                                "createdAt": "2022-01-01T00:00:00.000Z",
+                                "updatedAt": "2022-01-01T00:00:00.000Z"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "tags": [
+                "users"
+            ],
+            "summary": "Delete a user by ID",
+            "description": "Delete a user by ID",
+            "operationId": "deleteUser",
+            "produces": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the user to retrieve",
+                    "schema": {
+                        "type": "string",
+                        "example": "66a990f9351bd3041037330a"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "examples": {
+                        "application/json": {
+                            "code": 200,
+                            "message": null,
+                            "response": null
+                        }
+                    }
+                },
+                "404": {
+                    "description": "User not found",
+                    "examples": {
+                        "application/json": {
+                            "code": 404,
+                            "message": "User not found"
                         }
                     }
                 }

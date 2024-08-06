@@ -6,7 +6,7 @@ import IUsersRepository from "src/interface/repositories/users.repositories.js";
 import IGetUsersUseCase from "src/interface/usercases/users/get_users.usecase.js";
 
 @injectable()
-export default class GetUsersUserCase implements IGetUsersUseCase {
+export default class GetUsersUseCase implements IGetUsersUseCase {
     @inject(TYPES.repositories.IUsersRepository) repository: IUsersRepository;
     
     async execute(request: SearchRequestDto): Promise<[User[], number]> {

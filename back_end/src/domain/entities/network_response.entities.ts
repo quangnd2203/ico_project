@@ -5,7 +5,7 @@ class NetworkResponse<T> {
     public response?: T;
 
     static fromErrors: <T>(code: STATUS_CODE, error: string) => NetworkResponse<T>;
-    static success: <T>(data:any, message?: string) => NetworkResponse<T>;
+    static success: <T>(response:T, message?: string) => NetworkResponse<T>;
 
     constructor(code: STATUS_CODE, message?: string, response?: T) {
         this.code = code;

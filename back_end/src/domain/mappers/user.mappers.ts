@@ -1,13 +1,13 @@
-import ICreateUserMapper from 'src/interface/mappers/create_user.mappers.js';
-import CreateUserDto from '../dtos/create_user.dtos.js';
+import IUserMapper from 'src/interface/mappers/user.mappers.js';
 import User from '../entities/user.entities.js';
 import { injectable } from 'inversify';
+import UserDto from '../dtos/user.dtos.js';
 
 @injectable()
-export default class CreateUserMapper implements ICreateUserMapper {
+export default class UserMapper implements IUserMapper {
 
-    toResponse(entity: User): CreateUserDto {
-        return new CreateUserDto(
+    toResponse(entity: User): UserDto {
+        return new UserDto(
             entity.id,
             entity.name,
             entity.createdAt,
@@ -15,7 +15,7 @@ export default class CreateUserMapper implements ICreateUserMapper {
         );
     }
 
-    toDomain(dto: CreateUserDto): User {
+    toDomain(dto: UserDto): User {
         return new User(
             dto.id,
             dto.name,
