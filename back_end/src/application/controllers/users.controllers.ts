@@ -10,7 +10,6 @@ import CreateUserDto from "src/domain/dtos/create_user.dtos.js";
 import SearchRequestDto from "src/domain/dtos/search_request.dtos.js";
 import IGetUsersUseCase from "src/interface/usercases/users/get_users.usecase.js";
 import IGetUsersMapper from "src/interface/mappers/get_users.mappers.js";
-import PageResponseDto from "src/domain/dtos/page_response.dtos.js";
 
 @injectable()
 export default class UsersController implements IUsersController {
