@@ -19,7 +19,7 @@ export default class UsersRepository implements IUsersRepository {
         return userModel.toObject();
     }
 
-    async getAll(request: SearchRequestDto): Promise<User[]> {
+    async getAll(request: SearchRequestDto): Promise<[User[], number]> {
         const query = {};
         if (request.keyword) {
             query['name'] = {
@@ -31,10 +31,13 @@ export default class UsersRepository implements IUsersRepository {
         if (request.sortField) {
             sort[request.sortField] = request.sortOrder === 'ASC' ? 1 : -1;
         }
-        const listUsers = await UserModel.find(query)
+        const [listUsers, total] = await Promise.all([
+            UserModel.find(query)
             .skip((request.page - 1) * request.limit)
             .limit(request.limit)
-            .sort(sort);
-        return listUsers;
+            .sort(sort),
+            UserModel.countDocuments(query)
+        ]);
+        return [listUsers, total];
     }
 }

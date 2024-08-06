@@ -10,6 +10,7 @@ import CreateUserDto from "src/domain/dtos/create_user.dtos.js";
 import SearchRequestDto from "src/domain/dtos/search_request.dtos.js";
 import IGetUsersUseCase from "src/interface/usercases/users/get_users.usecase.js";
 import IGetUsersMapper from "src/interface/mappers/get_users.mappers.js";
+import PageResponseDto from "src/domain/dtos/page_response.dtos.js";
 
 @injectable()
 export default class UsersController implements IUsersController {
@@ -26,11 +27,13 @@ export default class UsersController implements IUsersController {
         }
     }
 
-    async getAll(request: SearchRequestDto): Promise<NetworkResponse<CreateUserDto[]>>{
+    async getAll(request: SearchRequestDto): Promise<NetworkResponse<PageResponseDto<CreateUserDto>>>{
         try{
-            const users = await this.getUsersUseCase.execute(request);
+            const [users,total] = await this.getUsersUseCase.execute(request);
             const response = container.get<IGetUsersMapper>(TYPES.mappers.GetUsersMapper).toResponse(users);
-            return NetworkResponse.success<CreateUserDto[]>(response);
+            return NetworkResponse.success<PageResponseDto<CreateUserDto>>(
+                new PageResponseDto<CreateUserDto>(response, total, request.page, request.limit)
+            );
         }catch(e){
             return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'get_users_error');
         }

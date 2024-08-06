@@ -9,7 +9,7 @@ import IGetUsersUseCase from "src/interface/usercases/users/get_users.usecase.js
 export default class GetUsersUserCase implements IGetUsersUseCase {
     @inject(TYPES.repositories.IUsersRepository) repository: IUsersRepository;
     
-    async execute(request: SearchRequestDto): Promise<User[]> {
+    async execute(request: SearchRequestDto): Promise<[User[], number]> {
         return this.repository.getAll(request);
     }
 }

@@ -26,11 +26,9 @@ export const dataProvider: DataProvider = {
         };
         const response = await apiClient.get(`/${resource}`, { params: query });
         console.log(response);
-        // const response: any = await baseDataProvider.getList(resource, query);
-        // response.data = response.data.response;
         return {
-            data: response.data.response,
-            total: response.headers['content-range'] ? parseInt(response.headers['content-range'].split(' ')[1]) : 0,
+            data: response.data.response.data,
+            total: response.data.response.total,
         };
     },
     create: (userId: String) => {

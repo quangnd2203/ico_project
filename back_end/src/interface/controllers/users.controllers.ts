@@ -5,5 +5,5 @@ import { NetworkResponse } from "src/domain/entities/network_response.entities.j
 
 export default interface IUsersController {
     create: (request: CreateUserDto) => Promise<NetworkResponse<CreateUserDto>>;
-    getAll: (request: SearchRequestDto) => Promise<NetworkResponse<CreateUserDto[]>>;
+    getAll: (request: SearchRequestDto) => Promise<NetworkResponse<PageResponseDto<CreateUserDto>>>;
 }

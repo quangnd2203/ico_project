@@ -24,8 +24,8 @@ export default class UsersRouters {
             res.set('Content-Range', `users 2`);
             const query = new SearchRequestDto(
                 req.query.keyword as string,
-                req.query.page as unknown as number,
-                req.query.limit as unknown as number,
+                parseInt(req.query.page as unknown as string) || 1,
+                parseInt(req.query.limit as unknown as string) || 10,
                 req.query.sortField as unknown as string,
                 req.query.sortOrder as string
             );
