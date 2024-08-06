@@ -22,6 +22,10 @@ import IDeleteUserUsecase from "src/interface/usercases/users/delete_user.usecas
 import DeleteUserUsecase from "src/infrastructure/usercases/users/delete_user.usecase.js";
 import UpdateUserUsecase from "src/infrastructure/usercases/users/update_user.usecase.js";
 import IUpdateUserUsecase from "src/interface/usercases/users/update_user.usecase.js";
+import IPurchasePackageMapper from "src/interface/mappers/purchase_package.mappers.js";
+import PurchasePackageMapper from "src/domain/mappers/purchase_package.mappers.js";
+import IPurchasePackageRepository from "src/interface/repositories/purchase_package.repositories.js";
+import PurchasePackageRepository from "src/infrastructure/repositories/purchase_package.repositories.js";
 
 export const container = new Container();
 
@@ -50,11 +54,12 @@ function injectUseCases(){
 /* Repositories */
 function injectRepositories(){
     container.bind<IUsersRepository>(TYPES.repositories.IUsersRepository).to(UsersRepository);
-
+    container.bind<IPurchasePackageRepository>(TYPES.repositories.IPurchasePackageRepository).to(PurchasePackageRepository);
 }
 
 /* Mappers */
 function injectMappers(){
     container.bind<IUserMapper>(TYPES.mappers.IUserMapper).to(UserMapper);
     container.bind<IGetUsersMapper>(TYPES.mappers.IGetUsersMapper).to(GetUsersMapper);
+    container.bind<IPurchasePackageMapper>(TYPES.mappers.IPurchasePackageMapper).to(PurchasePackageMapper);
 }

@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import User from 'src/domain/entities/user.entities.js'
 import mongooseTransformId from '../database_plugins/mongoose_transform_id.plugins.js';
 

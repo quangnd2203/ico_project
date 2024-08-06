@@ -11,10 +11,12 @@ const TYPES = {
     },
     repositories: {
         IUsersRepository: Symbol.for('IUsersRepository'),
+        IPurchasePackageRepository: Symbol.for('IPurchasePackageRepository'),
     },
     mappers: {
         IUserMapper: Symbol.for('IUserMapper'),
         IGetUsersMapper: Symbol.for('IGetUsersMapper'),
+        IPurchasePackageMapper: Symbol.for('IPurchasePackageMapper'),
     },
 };
 
