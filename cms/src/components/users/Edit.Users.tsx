@@ -1,4 +1,4 @@
-import { Create, SimpleForm, TextInput, required, CreateProps, Edit } from 'react-admin';
+import { SimpleForm, TextInput, required, CreateProps, Edit } from 'react-admin';
 import { JSX } from 'react/jsx-runtime';
 
 const EditUser = (props: JSX.IntrinsicAttributes & CreateProps<any, Error, any>) => (

@@ -36,6 +36,7 @@ export const dataProvider: DataProvider = {
     },
     create: async (resource, params) => {
         const response = await apiClient.post(`/${resource}`, params.data);
+        history.back();
         return { data: response.data.response };
     },
 }
