@@ -8,6 +8,11 @@ const TYPES = {
         IGetUserUseCase: Symbol.for('IGetUserUseCase'),
         IDeleteUserUsecase: Symbol.for('IDeleteUserUsecase'),
         IUpdateUserUsecase: Symbol.for('IUpdateUserUsecase'),
+        ICreatePurchasePackageUsecase: Symbol.for('ICreatePurchasePackageUsecase'),
+        IGetPurchasePackageUsecase: Symbol.for('IGetPurchasePackageUsecase'),
+        IDeletePurchasePackageUsecase: Symbol.for('IDeletePurchasePackageUsecase'),
+        IUpdatePurchasePackageUsecase: Symbol.for('IUpdatePurchasePackageUsecase'),
+        IGetAllPurchasePackageUsecase: Symbol.for('IGetAllPurchasePackageUsecase'),
     },
     repositories: {
         IUsersRepository: Symbol.for('IUsersRepository'),

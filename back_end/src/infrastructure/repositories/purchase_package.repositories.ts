@@ -51,7 +51,7 @@ export default class PurchasePackageRepository implements IPurchasePackageReposi
         const purchasePackage = container.get<IPurchasePackageMapper>(TYPES.mappers.IPurchasePackageMapper).toDomain(request as PurchasePackageDto);
         const purchasePackageModel = await PurchasePackageModel.findById(id);
         if (!purchasePackageModel) {
-            throw new Error('user_not_found');
+            throw new Error('package_not_found');
         }
         purchasePackageModel.set(purchasePackage);
         await purchasePackageModel.save();
