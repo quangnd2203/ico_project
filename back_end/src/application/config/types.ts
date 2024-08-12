@@ -23,6 +23,7 @@ const TYPES = {
         IUserMapper: Symbol.for('IUserMapper'),
         IGetUsersMapper: Symbol.for('IGetUsersMapper'),
         IPurchasePackageMapper: Symbol.for('IPurchasePackageMapper'),
+        IGetPurchasePackagesMapper: Symbol.for('IGetPurchasePackagesMapper'),
     },
 };
 

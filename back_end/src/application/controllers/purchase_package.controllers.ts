@@ -10,12 +10,14 @@ import IGetAllPurchasePackageUsecase from "src/interface/usercases/purchase_pack
 import IUpdatePurchasePackageUsecase from "src/interface/usercases/purchase_package/update.purchase_package.usecase.js";
 import { container } from "../config/dependencies.config.js";
 import IPurchasePackageMapper from "src/interface/mappers/purchase_package.mappers.js";
+import SearchRequestDto from "src/domain/dtos/search_request.dtos.js";
+import IGetPurchasePackagesMapper from "src/interface/mappers/get_purchase_packages.mappers.js";
 
 @injectable()
 export default class PurchasePackageController implements IPurchasePackageController{
     @inject(TYPES.useCases.ICreatePurchasePackageUsecase) private createPurchasePackageUseCase: ICreatePurchasePackageUsecase;
-    @inject(TYPES.useCases.IGetPurchasePackageUsecase) private getPurchasePackagesUseCase: IGetAllPurchasePackageUsecase;
-    @inject(TYPES.useCases.IGetAllPurchasePackageUsecase) private getPurchasePackageUsecase: IGetAllPurchasePackageUsecase;
+    @inject(TYPES.useCases.IGetPurchasePackageUsecase) private getPurchasePackageUseCase: IGetAllPurchasePackageUsecase;
+    @inject(TYPES.useCases.IGetAllPurchasePackageUsecase) private getAllPurchasePackageUsecase: IGetAllPurchasePackageUsecase;
     @inject(TYPES.useCases.IDeletePurchasePackageUsecase) private deletePurchasePackageUsecase: IDeletePurchasePackageUsecase;
     @inject(TYPES.useCases.IUpdatePurchasePackageUsecase) private updatePurchasePackageUsecase: IUpdatePurchasePackageUsecase;
 
@@ -29,8 +31,16 @@ export default class PurchasePackageController implements IPurchasePackageContro
         }
     }
 
-    getAll(): Promise<NetworkResponse<PageResponseDto<PurchasePackageDto>>> {
-        throw new Error("Method not implemented.");
+    async getAll(request: SearchRequestDto): Promise<NetworkResponse<PageResponseDto<PurchasePackageDto>>> {
+        try{
+            const [purchasePackages, total] = await this.getAllPurchasePackageUsecase.execute(request);
+            const response = container.get<IGetPurchasePackagesMapper>(TYPES.mappers.IGetPurchasePackagesMapper).toResponse(purchasePackages);
+            return NetworkResponse.success<PageResponseDto<PurchasePackageDto>>(
+                new PageResponseDto<PurchasePackageDto>(response, total, request.page, request.limit)
+            );
+        } catch (e) {
+            return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'get_all_purchase_package_error');
+        }
     }
 
     get(id: string): Promise<NetworkResponse<PurchasePackageDto>> {

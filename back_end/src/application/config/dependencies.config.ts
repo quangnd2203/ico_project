@@ -38,6 +38,8 @@ import UpdatePurchasePackageUsecase from "src/infrastructure/usercases/purchase_
 import DeletePurchasePackageUsecase from "src/infrastructure/usercases/purchase_package/delete.purchase_package.usecase.js";
 import IPurchasePackageController from "src/interface/controllers/purchase_package.controller.js";
 import PurchasePackageController from "../controllers/purchase_package.controllers.js";
+import IGetPurchasePackagesMapper from "src/interface/mappers/get_purchase_packages.mappers.js";
+import GetPurchasePackagesMapper from "src/domain/mappers/get_purchase_packages.mappers.js";
 
 export const container = new Container();
 
@@ -80,4 +82,5 @@ function injectMappers(){
     container.bind<IUserMapper>(TYPES.mappers.IUserMapper).to(UserMapper);
     container.bind<IGetUsersMapper>(TYPES.mappers.IGetUsersMapper).to(GetUsersMapper);
     container.bind<IPurchasePackageMapper>(TYPES.mappers.IPurchasePackageMapper).to(PurchasePackageMapper);
+    container.bind<IGetPurchasePackagesMapper>(TYPES.mappers.IGetPurchasePackagesMapper).to(GetPurchasePackagesMapper);
 }
