@@ -1,6 +1,7 @@
 const TYPES = {
     controller: {
         IUsersController: Symbol.for('IUsersController'),
+        IPurchasePackageController: Symbol.for('IPurchasePackageController'),
     },
     useCases: {
         ICreateUserUseCase: Symbol.for('ICreateUserUseCase'),

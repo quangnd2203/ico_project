@@ -36,6 +36,8 @@ import CreatePurchasePackageUsecase from "src/infrastructure/usercases/purchase_
 import GetAllPurchasePackageUsecase from "src/infrastructure/usercases/purchase_package/get_all.purchase_package.usecase.js";
 import UpdatePurchasePackageUsecase from "src/infrastructure/usercases/purchase_package/update.purchase_package.usecase.js";
 import DeletePurchasePackageUsecase from "src/infrastructure/usercases/purchase_package/delete.purchase_package.usecase.js";
+import IPurchasePackageController from "src/interface/controllers/purchase_package.controller.js";
+import PurchasePackageController from "../controllers/purchase_package.controllers.js";
 
 export const container = new Container();
 
@@ -49,7 +51,7 @@ export function inject() {
 /* Controllers */
 function injectControllers(){
     container.bind<IUsersController>(TYPES.controller.IUsersController).to(UsersController);
-
+    container.bind<IPurchasePackageController>(TYPES.controller.IPurchasePackageController).to(PurchasePackageController);
 }
 
 /* Use Cases */
