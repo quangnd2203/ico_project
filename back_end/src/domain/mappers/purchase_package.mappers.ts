@@ -8,6 +8,7 @@ export default class PurchasePackageMapper implements IPurchasePackageMapper {
     toResponse(entity: PurchasePackage): PurchasePackageDto {
         return new PurchasePackageDto(
             entity.id,
+            entity.name,
             entity.value,
             entity.tokenReceive,
             entity.type,
@@ -18,6 +19,7 @@ export default class PurchasePackageMapper implements IPurchasePackageMapper {
     toDomain(dto: PurchasePackageDto): PurchasePackage {
         return new PurchasePackage(
             dto.id,
+            dto.name,
             dto.value,
             dto.tokenReceive,
             dto.type,

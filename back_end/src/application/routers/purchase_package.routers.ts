@@ -20,6 +20,7 @@ export default class PurchasePackageRouters {
         this.router.post('/', async (req, res) => {
             const query = new PurchasePackageDto(
                 null,
+                req.body.name,
                 req.body.value,
                 req.body.tokenReceive,
                 req.body.type,

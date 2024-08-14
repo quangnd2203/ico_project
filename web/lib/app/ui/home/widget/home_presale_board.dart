@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: always_specify_types
 
+import 'package:flutter/material.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
+
+import '../../../../generated/l10n.dart';
 import '../../../constants/constants.dart';
 import '../../widgets/app_responsive_screen.dart';
 import 'home_banner_icon_animation.dart';
@@ -13,6 +17,10 @@ class HomePresaleBoard extends StatefulWidget {
 }
 
 class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveScreen {
+  TextStyle get timeTextStyle => AppTextStyles.getHeadingStyle(AppTextStyles.zendots).copyWith(color: AppColors.black);
+  TextStyle get timeDescriptionTextStyle =>
+      AppTextStyles.getXlStyle(AppTextStyles.bold).copyWith(color: AppColors.primary);
+
   @override
   Widget build(BuildContext context) {
     return buildResponsiveScreen(context);
@@ -65,8 +73,13 @@ class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveS
           Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              Text(
+                S.current.presale_title.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: AppTextStyles.getHeadingStyle(AppTextStyles.zendots),
+              ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               buildBottom(),
               const SizedBox(
@@ -97,27 +110,47 @@ class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveS
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: r'$0 ',
-                    style: AppTextStyles.getHeadingStyle(AppTextStyles.zendots).copyWith(color: AppColors.primary),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Received',
-                        style: AppTextStyles.getHeadingStyle(AppTextStyles.zendots).copyWith(color: AppColors.white),
-                      )
-                    ],
-                  ),
-                ),
+                buildClock(),
                 const SizedBox(
-                  height: 16,
+                  height: 40,
                 ),
                 buildNotes(),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildClock({
+    double width = 500,
+    double height = 120,
+    TextStyle? timeTextStyle,
+    TextStyle? timeDescriptionTextStyle,
+  }) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: AppColors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.5),
+              blurRadius: 20,
+              spreadRadius: 0.5,
+              offset: const Offset(0, 5),
+            ),
+          ],
+          border: Border.all(color: AppColors.primary, width: 2)),
+      child: Center(
+        child: TimerCountdown(
+          endTime: DateTime(2024, 12, 31, 23, 23, 59).toUtc(),
+          timeTextStyle: timeTextStyle ?? this.timeTextStyle,
+          descriptionTextStyle: timeDescriptionTextStyle ?? this.timeDescriptionTextStyle,
+          colonsTextStyle: timeTextStyle ?? this.timeTextStyle,
+        ),
       ),
     );
   }
@@ -323,10 +356,6 @@ class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveS
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // Text(
-        //   '$stageName: $price',
-        //   style: AppTextStyles.getBaseStyle(AppTextStyles.zendots),
-        // ),
         RichText(
             text: TextSpan(
           children: <TextSpan>[
@@ -348,10 +377,6 @@ class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveS
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // Text(
-        //   '$stageName: $price',
-        //   style: AppTextStyles.getBaseStyle(AppTextStyles.zendots),
-        // ),
         RichText(
             text: TextSpan(
           children: <TextSpan>[
@@ -447,24 +472,21 @@ class _HomePresaleBoardState extends State<HomePresaleBoard> with AppResponsiveS
         ),
         Column(
           children: <Widget>[
-            const SizedBox(
-              height: 30,
-            ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                RichText(
+                Text(
+                  S.current.presale_title.toUpperCase(),
                   textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: r'$0 ',
-                    style: AppTextStyles.get2xlPlusStyle(AppTextStyles.zendots).copyWith(color: AppColors.primary),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Received',
-                        style: AppTextStyles.get2xlPlusStyle(AppTextStyles.zendots).copyWith(color: AppColors.white),
-                      )
-                    ],
-                  ),
+                  style: AppTextStyles.get2xlStyle(AppTextStyles.zendots),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                buildClock(
+                  width: 400,
+                  timeTextStyle: timeTextStyle.copyWith(fontSize: 20),
+                  timeDescriptionTextStyle: timeDescriptionTextStyle.copyWith(fontSize: 14),
                 ),
                 const SizedBox(
                   height: 16,

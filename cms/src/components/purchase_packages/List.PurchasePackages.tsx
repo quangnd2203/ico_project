@@ -6,6 +6,7 @@ const ListPurchasePackages = (props: JSX.IntrinsicAttributes & ListProps<any>) =
     <List {...props}>
         <Datagrid>
             <TextField source="id" />
+            <TextField source="name" />
             <TextField source="value" />
             <TextField source="tokenReceive" />
             <TextField source="type" />

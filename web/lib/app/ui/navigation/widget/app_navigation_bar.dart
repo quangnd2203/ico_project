@@ -6,7 +6,7 @@ import '../../../constants/constants.dart';
 import '../../../routes/app_routes.dart';
 import '../../widgets/app_responsive_screen.dart';
 import '../../widgets/hover_text.dart';
-import 'app_navigation_menu.dart';
+// import 'app_navigation_menu.dart';
 
 class AppNavigationBar extends StatelessWidget with AppResponsiveScreen {
   const AppNavigationBar({super.key});
@@ -22,7 +22,7 @@ class AppNavigationBar extends StatelessWidget with AppResponsiveScreen {
             child: buildResponsiveScreen(context),
           ),
           const Spacer(),
-          const AppNavigationMenu()
+          // const AppNavigationMenu()
         ],
       ),
     );

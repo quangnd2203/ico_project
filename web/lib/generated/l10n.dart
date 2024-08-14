@@ -110,16 +110,6 @@ class S {
     );
   }
 
-  /// `Help those in need`
-  String get home_slogan {
-    return Intl.message(
-      'Help those in need',
-      name: 'home_slogan',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `All the help given in the world is largely not measured and displayed fully and accurately. PPCB was born with the meaning of recognizing and preserving the value of that help, equal to the number of PPCB you own.\nPPCB will represent you and me, as well as the global blockchain community, to join hands to contribute to eliminating global problems: health, education, religion, environment.\nFrom there, PPCB will begin its mission with each PPCB coin having a starting value of $0.001. To represent a mine willing to help worth $50M.`
   String get home_mindset {
     return Intl.message(
@@ -170,10 +160,10 @@ class S {
     );
   }
 
-  /// `Presale will start later:`
+  /// `Presale will end in:`
   String get presale_title {
     return Intl.message(
-      'Presale will start later:',
+      'Presale will end in:',
       name: 'presale_title',
       desc: '',
       args: [],
@@ -315,16 +305,6 @@ class S {
     return Intl.message(
       'Contract',
       name: 'contract',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `PPCB is a cryptocurrency of compassion,\nborn to fulfill the mission of assisting places in need.`
-  String get home_content {
-    return Intl.message(
-      'PPCB is a cryptocurrency of compassion,\nborn to fulfill the mission of assisting places in need.',
-      name: 'home_content',
       desc: '',
       args: [],
     );

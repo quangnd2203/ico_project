@@ -9,6 +9,7 @@ export default class GetPurchasePackagesMapper implements IGetPurchasePackagesMa
         return entity.map((purchasePackage) => {
             return new PurchasePackageDto(
                 purchasePackage.id,
+                purchasePackage.name,
                 purchasePackage.value,
                 purchasePackage.tokenReceive,
                 purchasePackage.type,
@@ -22,6 +23,7 @@ export default class GetPurchasePackagesMapper implements IGetPurchasePackagesMa
         return dto.map((purchasePackageDto) => {
             return new PurchasePackage(
                 purchasePackageDto.id,
+                purchasePackageDto.name,
                 purchasePackageDto.value,
                 purchasePackageDto.tokenReceive,
                 purchasePackageDto.type,

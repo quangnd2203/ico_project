@@ -21,24 +21,24 @@ class AppPages {
           ),
         ),
       ),
-      GoRoute(
-        path: Routes.whitePaper.route,
-        builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
-          child: WhitePaperScreen(),
-        ),
-      ),
-      GoRoute(
-        path: Routes.airdrop.route,
-        builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
-          child: AirdropScreen(),
-        ),
-      ),
-      GoRoute(
-        path: Routes.become_ambassador.route,
-        builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
-          child: BecomeAmbassadorScreen(),
-        ),
-      ),
+      // GoRoute(
+      //   path: Routes.whitePaper.route,
+      //   builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
+      //     child: WhitePaperScreen(),
+      //   ),
+      // ),
+      // GoRoute(
+      //   path: Routes.airdrop.route,
+      //   builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
+      //     child: AirdropScreen(),
+      //   ),
+      // ),
+      // GoRoute(
+      //   path: Routes.become_ambassador.route,
+      //   builder: (BuildContext context, GoRouterState state) => const NavigationScreen(
+      //     child: BecomeAmbassadorScreen(),
+      //   ),
+      // ),
       GoRoute(
         path: Routes.unknown.route,
         builder: (BuildContext context, GoRouterState state) => const UnknownScreen(),

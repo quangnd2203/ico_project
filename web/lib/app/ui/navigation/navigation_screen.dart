@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
 import '../../extensions/extensions.dart';
-import '../home/widget/home_footer_bar.dart';
 import '../ui.dart';
 import '../widgets/animated_hide_header.dart';
 import 'widget/app_menu_drawer.dart';
@@ -38,10 +37,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: widget.child,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const HomeFooterBar(),
                   ],
                 ),
               ),

@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../navigation/widget/app_navigation_bar.dart';
 import '../ui.dart';
 import 'widget/home_presale_board.dart';
-import 'widget/home_presale_head.dart';
-import 'widget/home_roadmap.dart';
-import 'widget/home_team.dart';
 import 'widget/top_background.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,37 +59,24 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
       child: Column(
         children: <Widget>[
           TopBackground(
+            isDynamicHeigh: true,
             child: Column(
               children: <Widget>[
                 AppNavigationBar(),
                 SizedBox(
-                  height: 32,
+                  height: 16,
                 ),
-                Expanded(
-                  child: HomePresaleHead(),
-                ),
+                HomePresaleBoard(),
               ],
             ),
           ),
-          SizedBox(
-            height: 16,
-          ),
-          TopBackground(
-            showBlur: false,
-            child: HomePresaleBoard(),
-          ),
-          TopBackground(
-            isDynamicHeigh: true,
-            child: Column(
-              children: <Widget>[
-                HomeRoadmap(),
-                SizedBox(
-                  height: 100,
-                ),
-                HomeTeam(),
-              ],
-            ),
-          ),
+          // SizedBox(
+          //   height: 16,
+          // ),
+          // TopBackground(
+          //   showBlur: false,
+          //   child: HomePresaleBoard(),
+          // ),
         ],
       ),
     );
@@ -105,38 +89,14 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
       child: Column(
         children: <Widget>[
           TopBackground(
+            isDynamicHeigh: true,
             child: Column(
               children: <Widget>[
                 AppNavigationBar(),
                 SizedBox(
-                  height: 32,
+                  height: 8,
                 ),
-                Expanded(
-                  child: HomePresaleHead(),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          TopBackground(
-            showBlur: false,
-            isDynamicHeigh: true,
-            child: HomePresaleBoard(),
-          ),
-          SizedBox(
-            height: 32,
-          ),
-          TopBackground(
-            isDynamicHeigh: true,
-            child: Column(
-              children: <Widget>[
-                HomeRoadmap(),
-                SizedBox(
-                  height: 16,
-                ),
-                HomeTeam(),
+                HomePresaleBoard(),
               ],
             ),
           ),

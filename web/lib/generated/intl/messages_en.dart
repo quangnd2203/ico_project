@@ -54,16 +54,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "fund": MessageLookupByLibrary.simpleMessage("Fund"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "home_android": MessageLookupByLibrary.simpleMessage("Android"),
-        "home_content": MessageLookupByLibrary.simpleMessage(
-            "PPCB is a cryptocurrency of compassion,\nborn to fulfill the mission of assisting places in need."),
         "home_download_apps":
             MessageLookupByLibrary.simpleMessage("PPCB APP - MINT COIN"),
         "home_ios": MessageLookupByLibrary.simpleMessage("iOS"),
         "home_mindset": MessageLookupByLibrary.simpleMessage(
             "All the help given in the world is largely not measured and displayed fully and accurately. PPCB was born with the meaning of recognizing and preserving the value of that help, equal to the number of PPCB you own.\nPPCB will represent you and me, as well as the global blockchain community, to join hands to contribute to eliminating global problems: health, education, religion, environment.\nFrom there, PPCB will begin its mission with each PPCB coin having a starting value of \$0.001. To represent a mine willing to help worth \$50M."),
         "home_pre_sales": MessageLookupByLibrary.simpleMessage("Pre-Sales"),
-        "home_slogan":
-            MessageLookupByLibrary.simpleMessage("Help those in need"),
         "how_to_participate":
             MessageLookupByLibrary.simpleMessage("How to participate"),
         "ico_chart": MessageLookupByLibrary.simpleMessage("ICO Chart"),
@@ -97,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "presale_later": MessageLookupByLibrary.simpleMessage(
             "Please wait until the pre-sale begins"),
         "presale_title":
-            MessageLookupByLibrary.simpleMessage("Presale will start later:"),
+            MessageLookupByLibrary.simpleMessage("Presale will end in:"),
         "presale_you_pay": MessageLookupByLibrary.simpleMessage("pay"),
         "presale_you_receive": MessageLookupByLibrary.simpleMessage("receive"),
         "refresh": MessageLookupByLibrary.simpleMessage("Refresh"),
