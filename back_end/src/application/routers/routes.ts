@@ -7,7 +7,7 @@ export default class Routes {
 
     constructor() {
         this.router.use('/users', new UsersRouters().getRouters());
-        this.router.use('/purchase_package', new PurchasePackageRouters().getRouters());
+        this.router.use('/purchase_packages', new PurchasePackageRouters().getRouters());
     }
 
     public getRouters() {
