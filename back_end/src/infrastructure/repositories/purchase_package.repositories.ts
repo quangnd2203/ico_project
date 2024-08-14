@@ -6,7 +6,9 @@ import PurchasePackage from "src/domain/entities/purchase_package.js";
 import IPurchasePackageMapper from "src/interface/mappers/purchase_package.mappers.js";
 import IPurchasePackageRepository from "src/interface/repositories/purchase_package.repositories.js";
 import PurchasePackageModel from "src/infrastructure/models/purchase_package.model.js";
+import { injectable } from "inversify";
 
+@injectable()
 export default class PurchasePackageRepository implements IPurchasePackageRepository{
 
     async create(request: PurchasePackageDto): Promise<PurchasePackage> {

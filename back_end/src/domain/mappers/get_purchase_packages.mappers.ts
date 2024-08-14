@@ -10,7 +10,7 @@ export default class GetPurchasePackagesMapper implements IGetPurchasePackagesMa
             return new PurchasePackageDto(
                 purchasePackage.id,
                 purchasePackage.value,
-                purchasePackage.token_receive,
+                purchasePackage.tokenReceive,
                 purchasePackage.type,
                 purchasePackage.createdAt,
                 purchasePackage.updatedAt,
@@ -23,7 +23,7 @@ export default class GetPurchasePackagesMapper implements IGetPurchasePackagesMa
             return new PurchasePackage(
                 purchasePackageDto.id,
                 purchasePackageDto.value,
-                purchasePackageDto.token_receive,
+                purchasePackageDto.tokenReceive,
                 purchasePackageDto.type,
                 purchasePackageDto.createdAt,
                 purchasePackageDto.updatedAt,

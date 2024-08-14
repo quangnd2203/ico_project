@@ -1,13 +1,15 @@
 import IPurchasePackageMapper from "src/interface/mappers/purchase_package.mappers.js";
 import PurchasePackageDto from "../dtos/purchase_package.dtos.js";
 import PurchasePackage from "../entities/purchase_package.js";
+import { injectable } from "inversify";
 
+@injectable()
 export default class PurchasePackageMapper implements IPurchasePackageMapper {
     toResponse(entity: PurchasePackage): PurchasePackageDto {
         return new PurchasePackageDto(
             entity.id,
             entity.value,
-            entity.token_receive,
+            entity.tokenReceive,
             entity.type,
             entity.createdAt,
             entity.updatedAt
@@ -17,7 +19,7 @@ export default class PurchasePackageMapper implements IPurchasePackageMapper {
         return new PurchasePackage(
             dto.id,
             dto.value,
-            dto.token_receive,
+            dto.tokenReceive,
             dto.type,
             dto.createdAt,
             dto.updatedAt

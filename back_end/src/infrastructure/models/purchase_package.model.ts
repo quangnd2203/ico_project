@@ -5,7 +5,7 @@ import PurchasePackage from 'src/domain/entities/purchase_package.js';
 const schema = new Schema<PurchasePackage>(
     {
         value: {type: Number, required: true},
-        token_receive: {type: Number, required: true},
+        tokenReceive: {type: Number, required: true},
         type: {type: String, required: true, enum: ['USDT', 'BNB']},
     }, 
     {

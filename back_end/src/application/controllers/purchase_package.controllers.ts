@@ -12,11 +12,12 @@ import { container } from "../config/dependencies.config.js";
 import IPurchasePackageMapper from "src/interface/mappers/purchase_package.mappers.js";
 import SearchRequestDto from "src/domain/dtos/search_request.dtos.js";
 import IGetPurchasePackagesMapper from "src/interface/mappers/get_purchase_packages.mappers.js";
+import IGetPurchasePackageUsecase from "src/interface/usercases/purchase_package/get.purchase_package.usecase.js";
 
 @injectable()
 export default class PurchasePackageController implements IPurchasePackageController{
     @inject(TYPES.useCases.ICreatePurchasePackageUsecase) private createPurchasePackageUseCase: ICreatePurchasePackageUsecase;
-    @inject(TYPES.useCases.IGetPurchasePackageUsecase) private getPurchasePackageUseCase: IGetAllPurchasePackageUsecase;
+    @inject(TYPES.useCases.IGetPurchasePackageUsecase) private getPurchasePackageUseCase: IGetPurchasePackageUsecase;
     @inject(TYPES.useCases.IGetAllPurchasePackageUsecase) private getAllPurchasePackageUsecase: IGetAllPurchasePackageUsecase;
     @inject(TYPES.useCases.IDeletePurchasePackageUsecase) private deletePurchasePackageUsecase: IDeletePurchasePackageUsecase;
     @inject(TYPES.useCases.IUpdatePurchasePackageUsecase) private updatePurchasePackageUsecase: IUpdatePurchasePackageUsecase;
@@ -43,16 +44,33 @@ export default class PurchasePackageController implements IPurchasePackageContro
         }
     }
 
-    get(id: string): Promise<NetworkResponse<PurchasePackageDto>> {
-        throw new Error("Method not implemented.");
+    async get(id: string): Promise<NetworkResponse<PurchasePackageDto>> {
+        try{
+            const purchasePackage = await this.getPurchasePackageUseCase.execute(id);
+            const response = container.get<IPurchasePackageMapper>(TYPES.mappers.IPurchasePackageMapper).toResponse(purchasePackage);
+            return NetworkResponse.success<PurchasePackageDto>(response);
+        } catch (e) {
+            return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'get_purchase_package_error');
+        }
     }
 
-    delete(id: string): Promise<NetworkResponse<null>> {
-        throw new Error("Method not implemented.");
+    async delete(id: string): Promise<NetworkResponse<null>> {
+        try{
+            this.deletePurchasePackageUsecase.execute(id);
+            return NetworkResponse.success<null>(null);
+        }catch(e){
+            return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'delete_purchase_package_error');
+        }
     }
 
-    update(id: string, params: PurchasePackageDto): Promise<NetworkResponse<PurchasePackageDto>> {
-        throw new Error("Method not implemented.");
+    async update(id: string, params: PurchasePackageDto): Promise<NetworkResponse<PurchasePackageDto>> {
+        try{
+            const purchasePackage = await this.updatePurchasePackageUsecase.execute(id, params);
+            const response = container.get<IPurchasePackageMapper>(TYPES.mappers.IPurchasePackageMapper).toResponse(purchasePackage);
+            return NetworkResponse.success<PurchasePackageDto>(response);
+        }catch(e){
+            return NetworkResponse.fromErrors(STATUS_CODE.bad_request, e.message || 'update_purchase_package_error');
+        }
     }
     
 }
