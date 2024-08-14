@@ -71,6 +71,21 @@ services:
     links:
       - boilerplate-mongo
 
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: .docker/web.DockerFile
+    ports:
+      - 8080:80
+    volumes: 
+      - ./web/:/web
+    tty: true
+    environment: 
+      - TZ=Asia/HoChiMinh
+    networks:
+      - api-network
+
 networks:
   api-network:
      driver: bridge
