@@ -23,6 +23,7 @@ export default class PurchasePackageRouters {
                 req.body.name,
                 req.body.value,
                 req.body.tokenReceive,
+                req.body.bonus,
                 req.body.type,
                 null,
                 null,

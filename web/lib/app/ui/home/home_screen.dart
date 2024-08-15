@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../navigation/widget/app_navigation_bar.dart';
 import '../ui.dart';
-import 'widget/home_presale_board.dart';
+import 'widget/home_purchase_packages.dart';
 import 'widget/top_background.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
                 SizedBox(
                   height: 16,
                 ),
-                HomePresaleBoard(),
+                HomePurchasePackages(),
               ],
             ),
           ),
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
                 SizedBox(
                   height: 8,
                 ),
-                HomePresaleBoard(),
+                HomePurchasePackages(),
               ],
             ),
           ),

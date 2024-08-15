@@ -7,6 +7,7 @@ const schema = new Schema<PurchasePackage>(
         name: {type: String, required: true},
         value: {type: Number, required: true},
         tokenReceive: {type: Number, required: true},
+        bonus: {type: Number},
         type: {type: String, required: true, enum: ['USDT', 'BNB']},
     }, 
     {

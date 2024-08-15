@@ -1,4 +1,16 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../app.dart';
+import '../../../constants/app_colors.dart';
+import '../../../constants/app_images.dart';
+import '../../../constants/app_text_styles.dart';
+import '../../../constants/app_values.dart';
+import '../../widgets/app_responsive_screen.dart';
+import '../../widgets/custom_outline_button.dart';
+import 'home_banner_icon_animation.dart';
 
 const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
   <String, dynamic>{
@@ -6,6 +18,7 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "BNB PACKAGE 01",
     "value": 0.1,
     "tokenReceive": 1000,
+    "bonus": null,
     "type": "BNB",
     "createdAt": "2024-08-14T09:17:44.046Z",
     "updatedAt": "2024-08-14T09:19:18.093Z"
@@ -15,6 +28,7 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "BNB PACKAGE 02",
     "value": 0.2,
     "tokenReceive": 2000,
+    "bonus": 0.1,
     "type": "BNB",
     "createdAt": "2024-08-14T09:18:02.175Z",
     "updatedAt": "2024-08-14T09:19:24.859Z"
@@ -24,6 +38,17 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "BNB PACKAGE 03",
     "value": 0.3,
     "tokenReceive": 3000,
+    "bonus": 0.2,
+    "type": "BNB",
+    "createdAt": "2024-08-14T09:18:19.837Z",
+    "updatedAt": "2024-08-14T09:19:28.902Z"
+  },
+  <String, dynamic>{
+    "id": "66bc765b081bc4883dfa57fa",
+    "name": "BNB PACKAGE 04",
+    "value": 0.4,
+    "tokenReceive": 4000,
+    "bonus": 0.3,
     "type": "BNB",
     "createdAt": "2024-08-14T09:18:19.837Z",
     "updatedAt": "2024-08-14T09:19:28.902Z"
@@ -33,6 +58,7 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "USDT PACKAGE 01",
     "value": 10,
     "tokenReceive": 1000,
+    "bonus": null,
     "type": "USDT",
     "createdAt": "2024-08-14T09:20:02.898Z",
     "updatedAt": "2024-08-14T09:20:02.898Z"
@@ -42,6 +68,7 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "USDT PACKAGE 02",
     "value": 20,
     "tokenReceive": 2000,
+    "bonus": 0.1,
     "type": "USDT",
     "createdAt": "2024-08-14T09:20:16.455Z",
     "updatedAt": "2024-08-14T09:20:16.455Z"
@@ -51,10 +78,21 @@ const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
     "name": "USDT PACKAGE 03",
     "value": 30,
     "tokenReceive": 3000,
+    "bonus": 0.2,
     "type": "USDT",
     "createdAt": "2024-08-14T09:20:35.157Z",
     "updatedAt": "2024-08-14T09:20:35.157Z"
-  }
+  },
+  <String, dynamic>{
+    "id": "66bc765b081bc4883dfa57fa",
+    "name": "USDT PACKAGE 04",
+    "value": 40,
+    "tokenReceive": 4000,
+    "bonus": 0.3,
+    "type": "USDT",
+    "createdAt": "2024-08-14T09:18:19.837Z",
+    "updatedAt": "2024-08-14T09:19:28.902Z"
+  },
 ];
 
 class HomePurchasePackages extends StatefulWidget {
@@ -64,9 +102,202 @@ class HomePurchasePackages extends StatefulWidget {
   State<HomePurchasePackages> createState() => _HomePurchasePackagesState();
 }
 
-class _HomePurchasePackagesState extends State<HomePurchasePackages> {
+class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppResponsiveScreen {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - 100,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 200,
+            right: 0,
+            child: HomeBannerIconAnimation(
+              direction: Axis.vertical,
+              speedRange: 100,
+              duration: const Duration(seconds: 15),
+              child: Image.asset(
+                AppImages.png('features_shape02'),
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 300,
+            child: HomeBannerIconAnimation(
+              speedRange: 150,
+              duration: const Duration(seconds: 15),
+              child: Image.asset(
+                AppImages.png('features_shape02'),
+                fit: BoxFit.fitHeight,
+                width: 200,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: HomeBannerIconAnimation(
+              speedRange: -150,
+              duration: const Duration(seconds: 15),
+              child: Image.asset(
+                AppImages.png('features_shape02'),
+                fit: BoxFit.fitHeight,
+                width: 400,
+              ),
+            ),
+          ),
+          Center(
+            child: buildResponsiveScreen(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildItem(Map<String, dynamic> item) {
+    final String background = item['type'] == 'BNB' ? AppImages.png('bnb_bg') : AppImages.png('usdt_bg');
+    final String icon = item['type'] == 'BNB' ? AppImages.png('bnb_icon') : AppImages.png('usdt_icon');
+    return Container(
+      width: 250,
+      height: 350,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: AppColors.black.withOpacity(0.5),
+        border: Border.all(color: AppColors.warring.shade100, width: 1.5),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 170,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      background,
+                      width: MediaQuery.of(context).size.width,
+                      height: 120,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                if (item['type'] == 'BNB')
+                  Image.asset(
+                    icon,
+                    width: 85,
+                    height: 85,
+                    fit: BoxFit.fill,
+                  )
+                else
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: CircleAvatar(
+                      radius: 36,
+                      backgroundColor: AppColors.warring.shade300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Image.asset(
+                          icon,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          Text(
+            item['name'].toString(),
+            style: AppTextStyles.getBaseStyle(AppTextStyles.bold).copyWith(color: AppColors.white),
+          ),
+          const Spacer(),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: AppColors.gray.shade400, width: 1.5),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: Text(
+              '${item['tokenReceive']} PPCB${item['bonus'] != null ? ' + ${item['bonus'] * 100}%' : ''}',
+              style: AppTextStyles.getXsStyle(AppTextStyles.bold).copyWith(color: AppColors.gray.shade300),
+            ),
+          ),
+          const Spacer(),
+          CustomOutlinedButton( 
+            title: 'BUY NOW (${item['value']} ${item['type']})',
+            action: () {
+              
+            },
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+            radius: 10,
+            backgroundColor: AppColors.warring.shade300,
+            borderColor: AppColors.primary,
+            textColor: AppColors.black,
+            textStyle: AppTextStyles.getSmStyle(AppTextStyles.bold),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget buildDesktop(BuildContext context) {
+    return Container(
+      width: DESKTOP_PAGE_MAX_WIDTH,
+      padding: const EdgeInsets.all(16),
+      child: GridView.count(
+        crossAxisCount: 4,
+        childAspectRatio: 3 / 3.7,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        shrinkWrap: true,
+        children: List<Widget>.generate(
+          RAW.length,
+          (int index) => buildItem(RAW[index]),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget buildMobile(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      width: TABLET_PAGE_MAX_WIDTH,
+      child: Column(
+        children: List<Widget>.generate(
+          RAW.length,
+          (int index) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: buildItem(RAW[index]),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget buildTablet(BuildContext context) {
+    return Container(
+      width: TABLET_PAGE_MAX_WIDTH,
+      padding: const EdgeInsets.all(16),
+      child: GridView.count(
+        crossAxisCount: 4,
+        childAspectRatio: 3 / 4.5,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        shrinkWrap: true,
+        children: List<Widget>.generate(
+          RAW.length,
+          (int index) => buildItem(RAW[index]),
+        ),
+      ),
+    );
   }
 }

@@ -26,7 +26,7 @@ class AppClients extends DioForBrowser {
   static const String PUT = 'PUT';
   static const String DELETE = 'DELETE';
 
-  static AppClients baseInstance = AppClients(baseUrl: AppEndpoint.BASE_URL);
+  static AppClients baseInstance = AppClients(baseUrl: AppEndpoint.BASE_URL_DEV);
   static Logger logger = Logger();
 
   Future<void> _requestInterceptor(RequestOptions options, RequestInterceptorHandler handler) async {

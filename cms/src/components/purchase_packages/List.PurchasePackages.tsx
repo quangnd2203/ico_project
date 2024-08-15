@@ -9,6 +9,7 @@ const ListPurchasePackages = (props: JSX.IntrinsicAttributes & ListProps<any>) =
             <TextField source="name" />
             <TextField source="value" />
             <TextField source="tokenReceive" />
+            <TextField source="bonus" />
             <TextField source="type" />
             <TextField source="createdAt" />
             <TextField source="updatedAt" />

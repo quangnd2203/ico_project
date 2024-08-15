@@ -1,12 +1,13 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String BASE_URL_DEV = 'dev-api.ppcb.io';
+  static const String BASE_URL_DEV = 'http://localhost:3000';
   static const String BASE_URL_PROD = 'api.ppcb.io';
 
   static const String BASE_URL = 'https://m03v1.wiremockapi.cloud';
   static const String API_KEY = 'O5my8JAR4D5CGVKppScL8KMBhlN_KfVn';
   static const String TEST_POST = '/json';
+  static const String PURCHASE_PACKAGES = '/api/purchase-packages';
 
   static const int connectionTimeout = 30000;
   static const int receiveTimeout = 30000;

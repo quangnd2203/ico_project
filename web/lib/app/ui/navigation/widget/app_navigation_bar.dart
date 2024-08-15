@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../constants/constants.dart';
 import '../../../routes/app_routes.dart';
+import '../../home/home_connect_wallet.dart';
 import '../../widgets/app_responsive_screen.dart';
 import '../../widgets/hover_text.dart';
 // import 'app_navigation_menu.dart';
@@ -21,7 +22,12 @@ class AppNavigationBar extends StatelessWidget with AppResponsiveScreen {
             onTap: () => context.go(Routes.home.route),
             child: buildResponsiveScreen(context),
           ),
-          const Spacer(),
+          const SizedBox(
+            width: 16,
+          ),
+          const Expanded(
+            child: HomeConnectWallet(),
+          ),
           // const AppNavigationMenu()
         ],
       ),
@@ -63,8 +69,8 @@ class AppNavigationBar extends StatelessWidget with AppResponsiveScreen {
       children: <Widget>[
         Image.asset(
           AppImages.png('logo'),
-          width: 70,
-          height: 70,
+          width: 60,
+          height: 60,
           fit: BoxFit.fill,
         ),
         HoverText(

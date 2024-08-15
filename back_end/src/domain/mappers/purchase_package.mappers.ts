@@ -11,6 +11,7 @@ export default class PurchasePackageMapper implements IPurchasePackageMapper {
             entity.name,
             entity.value,
             entity.tokenReceive,
+            entity.bonus,
             entity.type,
             entity.createdAt,
             entity.updatedAt
@@ -22,6 +23,7 @@ export default class PurchasePackageMapper implements IPurchasePackageMapper {
             dto.name,
             dto.value,
             dto.tokenReceive,
+            dto.bonus,
             dto.type,
             dto.createdAt,
             dto.updatedAt
