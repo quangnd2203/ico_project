@@ -21,8 +21,6 @@ class LoadMoreEmpty extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(AppImages.png('no_data'), width: 150, height: 150),
-            const SizedBox(height: 5),
             Text(
               title ?? S.current.no_data_found,
               textAlign: TextAlign.center,

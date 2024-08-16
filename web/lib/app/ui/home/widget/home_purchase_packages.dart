@@ -2,14 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../app.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_images.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../../constants/app_values.dart';
+import '../../ui.dart';
 import '../../widgets/app_responsive_screen.dart';
 import '../../widgets/custom_outline_button.dart';
+import 'bloc/purchase_packages_cubit.dart';
 import 'home_banner_icon_animation.dart';
 
 const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
@@ -103,6 +107,17 @@ class HomePurchasePackages extends StatefulWidget {
 }
 
 class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppResponsiveScreen {
+  @override
+  void initState() {
+    if (!GetIt.I.isRegistered<PurchasePackagesCubit>()) {
+      GetIt.I.registerSingleton(PurchasePackagesCubit());
+    }
+    _purchasePackagesCubit.getPurchasePackages();
+    super.initState();
+  }
+
+  late final PurchasePackagesCubit _purchasePackagesCubit = GetIt.I<PurchasePackagesCubit>();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -229,11 +244,9 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
             ),
           ),
           const Spacer(),
-          CustomOutlinedButton( 
+          CustomOutlinedButton(
             title: 'BUY NOW (${item['value']} ${item['type']})',
-            action: () {
-              
-            },
+            action: () {},
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
             radius: 10,
             backgroundColor: AppColors.warring.shade300,
@@ -250,17 +263,26 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
   Widget buildDesktop(BuildContext context) {
     return Container(
       width: DESKTOP_PAGE_MAX_WIDTH,
+      height: MediaQuery.of(context).size.height - 16,
       padding: const EdgeInsets.all(16),
-      child: GridView.count(
-        crossAxisCount: 4,
-        childAspectRatio: 3 / 3.7,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        shrinkWrap: true,
-        children: List<Widget>.generate(
-          RAW.length,
-          (int index) => buildItem(RAW[index]),
-        ),
+      child: BlocBuilder<PurchasePackagesCubit, PurchasePackagesState>(
+        bloc: _purchasePackagesCubit,
+        builder: (BuildContext context, PurchasePackagesState state) {
+          if (state.data.isEmpty) {
+            return const LoadMoreEmpty();
+          }
+          return GridView.count(
+            crossAxisCount: 4,
+            childAspectRatio: 3 / 3.7,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            shrinkWrap: true,
+            children: List<Widget>.generate(
+              state.data.length,
+              (int index) => buildItem(state.data[index]),
+            ),
+          );
+        },
       ),
     );
   }
@@ -268,16 +290,24 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
   @override
   Widget buildMobile(BuildContext context) {
     return Container(
+      width: MOBILE_PAGE_MAX_WIDTH,
       padding: const EdgeInsets.all(16),
-      width: TABLET_PAGE_MAX_WIDTH,
-      child: Column(
-        children: List<Widget>.generate(
-          RAW.length,
-          (int index) => Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: buildItem(RAW[index]),
-          ),
-        ),
+      child: BlocBuilder<PurchasePackagesCubit, PurchasePackagesState>(
+        bloc: _purchasePackagesCubit,
+        builder: (BuildContext context, PurchasePackagesState state) {
+          if (state.data.isEmpty) {
+            return const LoadMoreEmpty();
+          }
+          return Column(
+            children: List<Widget>.generate(
+              state.data.length,
+              (int index) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: buildItem(state.data[index]),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -287,16 +317,24 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
     return Container(
       width: TABLET_PAGE_MAX_WIDTH,
       padding: const EdgeInsets.all(16),
-      child: GridView.count(
-        crossAxisCount: 4,
-        childAspectRatio: 3 / 4.5,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        shrinkWrap: true,
-        children: List<Widget>.generate(
-          RAW.length,
-          (int index) => buildItem(RAW[index]),
-        ),
+      child: BlocBuilder<PurchasePackagesCubit, PurchasePackagesState>(
+        bloc: _purchasePackagesCubit,
+        builder: (BuildContext context, PurchasePackagesState state) {
+          if (state.data.isEmpty) {
+            return const LoadMoreEmpty();
+          }
+          return GridView.count(
+            crossAxisCount: 4,
+            childAspectRatio: 3 / 4.5,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            shrinkWrap: true,
+            children: List<Widget>.generate(
+              state.data.length,
+              (int index) => buildItem(state.data[index]),
+            ),
+          );
+        },
       ),
     );
   }

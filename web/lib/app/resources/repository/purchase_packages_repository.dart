@@ -16,10 +16,10 @@ class PurchasePackagesRepository {
 
   static PurchasePackagesRepository? _instance;
 
-  Future<NetworkState<dynamic>> getAll() async {
+  Future<NetworkState< List<Map<String, dynamic>>>> getAll() async {
     final bool isDisconnect = await WifiService.isDisconnect();
     if (isDisconnect) {
-      return NetworkState<dynamic>.withDisconnect();
+      return NetworkState< List<Map<String, dynamic>>>.withDisconnect();
     }
     try {
       final Response<dynamic> response = await AppClients.baseInstance.get(
@@ -28,12 +28,12 @@ class PurchasePackagesRepository {
           'limit': 999,
         }
       );
-      return NetworkState<dynamic>(
+      return NetworkState< List<Map<String, dynamic>>>(
         status: AppEndpoint.SUCCESS,
-        data: response.data['response']['data'],
+        data: (response.data['response']['data'] as List<dynamic>).map((e) => e as Map<String, dynamic>).toList(),
       );
     } on DioError catch (e) {
-      return NetworkState<dynamic>.withError(e);
+      return NetworkState< List<Map<String, dynamic>>>.withError(e);
     }
   }
 

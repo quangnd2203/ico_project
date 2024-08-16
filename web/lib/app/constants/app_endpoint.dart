@@ -7,7 +7,7 @@ class AppEndpoint {
   static const String BASE_URL = 'https://m03v1.wiremockapi.cloud';
   static const String API_KEY = 'O5my8JAR4D5CGVKppScL8KMBhlN_KfVn';
   static const String TEST_POST = '/json';
-  static const String PURCHASE_PACKAGES = '/api/purchase-packages';
+  static const String PURCHASE_PACKAGES = '/api/purchase_packages';
 
   static const int connectionTimeout = 30000;
   static const int receiveTimeout = 30000;
