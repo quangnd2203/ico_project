@@ -58,7 +58,6 @@ FlutterWalletConnect = function ({projectId, metadata, chains}){
 
     this.getState = function(){
         return this.web3Modal.getState();
-    
     }
 }
 
