@@ -18,6 +18,8 @@ class PurchasePackagesCubit extends Cubit<PurchasePackagesState> {
     GetIt.I<ApplicationCubit>().setLoading(false);
     if (networkState.isSuccess) {
       emit(PurchasePackagesLoaded(networkState.data!));
+    }else{
+      print('DIT ME LOI ${networkState}');
     }
   }
 }

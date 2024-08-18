@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 
 import 'app/app.dart';
 import 'app/constants/constants.dart';
+import 'app/resources/service/wifi_service.dart';
 import 'app/utils/utils.dart';
 
 Future<void> main() async {
@@ -24,5 +25,6 @@ Future<void> main() async {
   flavor = const String.fromEnvironment('FLAVOR', defaultValue: 'dev');
   await AppPrefs.initListener();
   Logger().d('RUNNING IN $flavor ENVIRONMENT'.toUpperCase());
+  WifiService();
   runApp(const App());
 }

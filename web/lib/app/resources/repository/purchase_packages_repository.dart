@@ -17,10 +17,10 @@ class PurchasePackagesRepository {
   static PurchasePackagesRepository? _instance;
 
   Future<NetworkState< List<Map<String, dynamic>>>> getAll() async {
-    final bool isDisconnect = await WifiService.isDisconnect();
-    if (isDisconnect) {
-      return NetworkState< List<Map<String, dynamic>>>.withDisconnect();
-    }
+    // final bool isDisconnect = await WifiService.isDisconnect();
+    // if (isDisconnect) {
+    //   return NetworkState< List<Map<String, dynamic>>>.withDisconnect();
+    // }
     try {
       final Response<dynamic> response = await AppClients.baseInstance.get(
         AppEndpoint.PURCHASE_PACKAGES,
