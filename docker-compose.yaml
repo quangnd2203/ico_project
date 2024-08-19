@@ -86,6 +86,21 @@ services:
     networks:
       - api-network
 
+  smart_contract:
+    container_name: smart_contract
+    build:
+      context: .
+      dockerfile: .docker/smart_contract.DockerFile
+    ports:
+      - 8545:8545
+    volumes: 
+      - ./smart_contract:/smart_contract
+    tty: true
+    environment: 
+      - TZ=Asia/HoChiMinh
+    networks:
+      - api-network
+
 networks:
   api-network:
      driver: bridge
