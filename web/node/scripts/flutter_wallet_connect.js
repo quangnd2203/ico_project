@@ -1,7 +1,6 @@
-const { createWeb3Modal, defaultConfig} = require('@web3modal/ethers');
-const { BrowserProvider, Contract, formatUnits } = require('ethers');
+const { createWeb3Modal, defaultConfig } = require('@web3modal/ethers');
 
-FlutterWalletConnect = function ({projectId, metadata, chains}){
+FlutterWalletConnect = function ({ projectId, metadata, chains }) {
     const config = defaultConfig({
         metadata,
         enableInjected: false
@@ -13,57 +12,89 @@ FlutterWalletConnect = function ({projectId, metadata, chains}){
         chains: chains,
     });
 
-    this.connect = async function(){
+    this.connect = async function () {
         return this.web3Modal.open('Connect');
     }
 
-    this.disconnect = function(){
+    this.disconnect = function () {
         return this.web3Modal.disconnect();
     }
 
-    this.getAccounts = async function(){
+    this.getAccounts = async function () {
         return this.web3Modal.getAddress();
     }
 
-    this.getChainId = function(){
+    this.getChainId = function () {
         return this.web3Modal.getChainId();
     }
 
-    this.isConnected = function(){
+    this.isConnected = function () {
         return this.web3Modal.getIsConnected();
     }
 
-    this.subscribeWalletInfo = function(callback){
+    this.subscribeWalletInfo = function (callback) {
         this.web3Modal.subscribeWalletInfo(callback);
     }
 
-    this.subscribeProvider = function(callback){
+    this.subscribeProvider = function (callback) {
         this.web3Modal.subscribeProvider(callback);
     }
 
-    this.subscribeState = function(callback){
+    this.subscribeState = function (callback) {
         this.web3Modal.subscribeState(callback);
     }
 
-    this.switchNetwork = async function(chainId){
+    this.switchNetwork = async function (chainId) {
         return this.web3Modal.switchNetwork(chainId);
     }
 
-    this.closeModal = async function(){
+    this.closeModal = async function () {
         return this.web3Modal.close();
     }
 
-    this.openModal = async function(view){
-        return this.web3Modal.open({view: view});
+    this.openModal = async function (view) {
+        return this.web3Modal.open({ view: view });
     }
 
-    this.getState = function(){
+    this.getState = function () {
         return this.web3Modal.getState();
     }
 
-    this.getProvider = function(){
+    this.getProvider = async function () {
         return this.web3Modal.getWalletProvider();
     }
+
+    // this.icoSmartContract = async function () {
+    //     const ethersProvider = new BrowserProvider(await this.getProvider());
+    //     const signer = await ethersProvider.getSigner()
+    //     const contract = new Contract('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', abi, signer);
+    //     // console.log(await contract.owner());
+    //     ethersProvider.send('wallet_watchAsset', {
+    //         type: 'ERC20',
+    //         options: {
+    //             address: '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766',
+    //         },
+    //     })
+    // }
 }
 
 window.FlutterWalletConnect = FlutterWalletConnect;
+
+window.FlutterWalletConnectTest = new FlutterWalletConnect({
+    projectId: 'c36bf582b97350dd8130834ceb358c39',
+    metadata: {
+        name: 'PPCB',
+        description: 'PPCB',
+        url: 'https://ppcb.io',
+        icons: ['https://avatars.githubusercontent.com/u/37784886'],
+    },
+    chains: [
+        {
+            chainId: 97,
+            name: 'Binance Smart Chain Testnet',
+            currency: 'tBNB',
+            explorerUrl: 'https://testnet.bscscan.com',
+            rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+        }
+    ],
+});

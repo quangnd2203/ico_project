@@ -1,103 +1,16 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../app.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_images.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../../constants/app_values.dart';
 import '../../ui.dart';
-import '../../widgets/app_responsive_screen.dart';
-import '../../widgets/custom_outline_button.dart';
 import 'bloc/purchase_packages_cubit.dart';
 import 'home_banner_icon_animation.dart';
-
-const List<Map<String, dynamic>> RAW = <Map<String, dynamic>>[
-  <String, dynamic>{
-    "id": "66bc7638081bc4883dfa57f1",
-    "name": "BNB PACKAGE 01",
-    "value": 0.1,
-    "tokenReceive": 1000,
-    "bonus": null,
-    "type": "BNB",
-    "createdAt": "2024-08-14T09:17:44.046Z",
-    "updatedAt": "2024-08-14T09:19:18.093Z"
-  },
-  <String, dynamic>{
-    "id": "66bc764a081bc4883dfa57f5",
-    "name": "BNB PACKAGE 02",
-    "value": 0.2,
-    "tokenReceive": 2000,
-    "bonus": 0.1,
-    "type": "BNB",
-    "createdAt": "2024-08-14T09:18:02.175Z",
-    "updatedAt": "2024-08-14T09:19:24.859Z"
-  },
-  <String, dynamic>{
-    "id": "66bc765b081bc4883dfa57fa",
-    "name": "BNB PACKAGE 03",
-    "value": 0.3,
-    "tokenReceive": 3000,
-    "bonus": 0.2,
-    "type": "BNB",
-    "createdAt": "2024-08-14T09:18:19.837Z",
-    "updatedAt": "2024-08-14T09:19:28.902Z"
-  },
-  <String, dynamic>{
-    "id": "66bc765b081bc4883dfa57fa",
-    "name": "BNB PACKAGE 04",
-    "value": 0.4,
-    "tokenReceive": 4000,
-    "bonus": 0.3,
-    "type": "BNB",
-    "createdAt": "2024-08-14T09:18:19.837Z",
-    "updatedAt": "2024-08-14T09:19:28.902Z"
-  },
-  <String, dynamic>{
-    "id": "66bc76c26292f4b0f0de7442",
-    "name": "USDT PACKAGE 01",
-    "value": 10,
-    "tokenReceive": 1000,
-    "bonus": null,
-    "type": "USDT",
-    "createdAt": "2024-08-14T09:20:02.898Z",
-    "updatedAt": "2024-08-14T09:20:02.898Z"
-  },
-  <String, dynamic>{
-    "id": "66bc76d06292f4b0f0de7446",
-    "name": "USDT PACKAGE 02",
-    "value": 20,
-    "tokenReceive": 2000,
-    "bonus": 0.1,
-    "type": "USDT",
-    "createdAt": "2024-08-14T09:20:16.455Z",
-    "updatedAt": "2024-08-14T09:20:16.455Z"
-  },
-  <String, dynamic>{
-    "id": "66bc76e36292f4b0f0de744a",
-    "name": "USDT PACKAGE 03",
-    "value": 30,
-    "tokenReceive": 3000,
-    "bonus": 0.2,
-    "type": "USDT",
-    "createdAt": "2024-08-14T09:20:35.157Z",
-    "updatedAt": "2024-08-14T09:20:35.157Z"
-  },
-  <String, dynamic>{
-    "id": "66bc765b081bc4883dfa57fa",
-    "name": "USDT PACKAGE 04",
-    "value": 40,
-    "tokenReceive": 4000,
-    "bonus": 0.3,
-    "type": "USDT",
-    "createdAt": "2024-08-14T09:18:19.837Z",
-    "updatedAt": "2024-08-14T09:19:28.902Z"
-  },
-];
 
 class HomePurchasePackages extends StatefulWidget {
   const HomePurchasePackages({super.key});

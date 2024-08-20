@@ -63,6 +63,7 @@
     </div>
   </div>
   <script>
+    /*
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -77,6 +78,25 @@
         }
       });
     });
+    const walletConnect = new FlutterWalletConnect({
+      projectId: 'c36bf582b97350dd8130834ceb358c39',
+      metadata: {
+        name: 'PPCB',
+        description: 'PPCB',
+        url: 'https://ppcb.io',
+        icons: ['https://avatars.githubusercontent.com/u/37784886'],
+      },
+      chains: [
+        {
+          chainId: 97,
+          name: 'Binance Smart Chain Testnet',
+          currency: 'tBNB',
+          explorerUrl: 'https://testnet.bscscan.com',
+          rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+        }
+      ],
+    });
+    */
     function hideSplashScreen() {
       var splashScreen = document.querySelector('.splash-screen');
       splashScreen.style.display = 'none';
