@@ -52,7 +52,9 @@
   <script src=".dist/430.bundle.js"></script>
   <script src=".dist/737.bundle.js"></script>
   <script src=".dist/940.bundle.js"></script>
+  <script src=".dist/erc20.bundle.js" type="application/javascript"></script>
   <script src=".dist/flutter_wallet_connect.bundle.js" type="application/javascript"></script>
+  <script src=".dist/ico.bundle.js" type="application/javascript"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -78,7 +80,9 @@
         }
       });
     });
-    const walletConnect = new FlutterWalletConnect({
+    */
+
+    const wc = new FlutterWalletConnect({
       projectId: 'c36bf582b97350dd8130834ceb358c39',
       metadata: {
         name: 'PPCB',
@@ -96,7 +100,14 @@
         }
       ],
     });
-    */
+
+    async function setup() {
+      const provider = await wc.getProvider();
+      const usdt = new ERC20(provider, '0xc4a0879BBFbC7f557De9cfB4ACB2Dbf6441188BC');
+      const ppcb = new ERC20(provider, '0xbe9469fA5Ad0e37aD74Be8F71e3C661e94E61882');
+      const ico = new ICO(provider, '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766');
+    }
+
     function hideSplashScreen() {
       var splashScreen = document.querySelector('.splash-screen');
       splashScreen.style.display = 'none';

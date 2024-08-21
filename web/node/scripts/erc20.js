@@ -6,11 +6,18 @@ ERC20 = function({walletConnectProvider, contractAddress}){
     this.signer = this.provider.getSigner();
     this.contract = new Contract(contractAddress, erc20ABI, this.signer);
 
-    this.buyByUSDT = async function(amount){
-        this.contract.buyByUSDT(formatUnits(amount, 'ether'));
+    this.importTokenToWallet = async function(){
+        ethersProvider.send('wallet_watchAsset', {
+            type: 'ERC20',
+            options: {
+                address: contractAddress,
+            },
+        })
     }
 
-    this.buyByEther = async function(amount){
-        return this.contract.buyByEther({value: formatUnits(amount, 'ether')});
+    this.approve = async function(spender, amount){
+        return await this.contract.approve(spender, formatUnits(amount, 'ether'));
     }
 }
+
+window.ERC20 = ERC20;

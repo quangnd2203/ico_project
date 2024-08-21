@@ -1,4 +1,5 @@
 const { createWeb3Modal, defaultConfig } = require('@web3modal/ethers');
+const { BrowserProvider, Contract, formatUnits } = require('ethers');
 
 FlutterWalletConnect = function ({ projectId, metadata, chains }) {
     const config = defaultConfig({
@@ -61,40 +62,42 @@ FlutterWalletConnect = function ({ projectId, metadata, chains }) {
     }
 
     this.getProvider = async function () {
-        return this.web3Modal.getWalletProvider();
+        return await this.web3Modal.getWalletProvider();
     }
 
-    // this.icoSmartContract = async function () {
-    //     const ethersProvider = new BrowserProvider(await this.getProvider());
-    //     const signer = await ethersProvider.getSigner()
-    //     const contract = new Contract('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', abi, signer);
-    //     // console.log(await contract.owner());
-    //     ethersProvider.send('wallet_watchAsset', {
-    //         type: 'ERC20',
-    //         options: {
-    //             address: '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766',
-    //         },
-    //     })
-    // }
+    this.icoSmartContract = async function () {
+        const provider = await this.getProvider();
+        console.log(typeof provider);
+        const ethersProvider = new BrowserProvider(await this.getProvider());
+        // const signer = await ethersProvider.getSigner()
+        // const contract = new Contract('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', abi, signer);
+        // // console.log(await contract.owner());
+        // ethersProvider.send('wallet_watchAsset', {
+        //     type: 'ERC20',
+        //     options: {
+        //         address: '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766',
+        //     },
+        // })
+    }
 }
 
 window.FlutterWalletConnect = FlutterWalletConnect;
 
-window.FlutterWalletConnectTest = new FlutterWalletConnect({
-    projectId: 'c36bf582b97350dd8130834ceb358c39',
-    metadata: {
-        name: 'PPCB',
-        description: 'PPCB',
-        url: 'https://ppcb.io',
-        icons: ['https://avatars.githubusercontent.com/u/37784886'],
-    },
-    chains: [
-        {
-            chainId: 97,
-            name: 'Binance Smart Chain Testnet',
-            currency: 'tBNB',
-            explorerUrl: 'https://testnet.bscscan.com',
-            rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-        }
-    ],
-});
+// window.FlutterWalletConnectTest = new FlutterWalletConnect({
+//     projectId: 'c36bf582b97350dd8130834ceb358c39',
+//     metadata: {
+//         name: 'PPCB',
+//         description: 'PPCB',
+//         url: 'https://ppcb.io',
+//         icons: ['https://avatars.githubusercontent.com/u/37784886'],
+//     },
+//     chains: [
+//         {
+//             chainId: 97,
+//             name: 'Binance Smart Chain Testnet',
+//             currency: 'tBNB',
+//             explorerUrl: 'https://testnet.bscscan.com',
+//             rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+//         }
+//     ],
+// });
