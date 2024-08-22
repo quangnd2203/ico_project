@@ -1,18 +1,23 @@
-const { BrowserProvider, Contract, formatUnits } = require('ethers');
+const { BrowserProvider, Contract, formatUnits, ethers } = require('ethers');
 const icoABI = require('../abi/ico.json');
 
-ICO = function({walletConnectProvider, contractAddress}){
+ICO = async function({walletConnectProvider, contractAddress}){
     this.provider = new BrowserProvider(walletConnectProvider);
-    this.signer = this.provider.getSigner();
-    this.contract = new Contract(contractAddress, icoABI, this.signer);
+
+    this.init = async function(){
+        this.signer = await this.provider.getSigner();
+        this.contract = new Contract(contractAddress, erc20ABI, this.signer);
+    }
 
     this.buyByUSDT = async function(amount){
-        return await this.contract.buyByUSDT(formatUnits(amount, 'ether'));
+        return this.contract.buyByUSDT(ethers.parseUnits(amount, 'ether'));
     }
 
     this.buyByEther = async function(amount){
-        return await this.contract.buyByEther({value: formatUnits(amount, 'ether')});
+        return this.contract.buyByEther({value: ethers.parseUnits(amount, 'ether')});
     }
 }
+
+module.exports = ICO;
 
 window.ICO = ICO;

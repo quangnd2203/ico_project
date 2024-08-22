@@ -1,5 +1,7 @@
 const { createWeb3Modal, defaultConfig } = require('@web3modal/ethers');
 const { BrowserProvider, Contract, formatUnits } = require('ethers');
+const ICO = require('./ico.js');
+const ERC20 = require('./erc20.js');
 
 FlutterWalletConnect = function ({ projectId, metadata, chains }) {
     const config = defaultConfig({
@@ -62,42 +64,38 @@ FlutterWalletConnect = function ({ projectId, metadata, chains }) {
     }
 
     this.getProvider = async function () {
-        return await this.web3Modal.getWalletProvider();
+        return this.web3Modal.getWalletProvider();
     }
 
     this.icoSmartContract = async function () {
         const provider = await this.getProvider();
-        console.log(typeof provider);
-        const ethersProvider = new BrowserProvider(await this.getProvider());
-        // const signer = await ethersProvider.getSigner()
-        // const contract = new Contract('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', abi, signer);
-        // // console.log(await contract.owner());
-        // ethersProvider.send('wallet_watchAsset', {
-        //     type: 'ERC20',
-        //     options: {
-        //         address: '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766',
-        //     },
-        // })
+        const ico = new ICO({
+            walletConnectProvider: provider,
+            contractAddress: '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766',
+        });
+        await ico.init();
+        return ico;
+    }
+
+    this.usdtSmartContract = async function () {
+        const provider = await this.getProvider();
+        const usdt = new ERC20({
+            walletConnectProvider: provider,
+            contractAddress: '0xc4a0879BBFbC7f557De9cfB4ACB2Dbf6441188BC',
+        });
+        await usdt.init();
+        return usdt;
+    }
+
+    this.ppcbSmartContract = async function () {
+        const provider = await this.getProvider();
+        const ppcb = new ERC20({
+            walletConnectProvider: provider,
+            contractAddress: '0xbe9469fA5Ad0e37aD74Be8F71e3C661e94E61882',
+        });
+        await ppcb.init();
+        return ppcb;
     }
 }
 
 window.FlutterWalletConnect = FlutterWalletConnect;
-
-// window.FlutterWalletConnectTest = new FlutterWalletConnect({
-//     projectId: 'c36bf582b97350dd8130834ceb358c39',
-//     metadata: {
-//         name: 'PPCB',
-//         description: 'PPCB',
-//         url: 'https://ppcb.io',
-//         icons: ['https://avatars.githubusercontent.com/u/37784886'],
-//     },
-//     chains: [
-//         {
-//             chainId: 97,
-//             name: 'Binance Smart Chain Testnet',
-//             currency: 'tBNB',
-//             explorerUrl: 'https://testnet.bscscan.com',
-//             rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545',
-//         }
-//     ],
-// });
