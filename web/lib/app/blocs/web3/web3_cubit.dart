@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 // import 'package:flutter_web3/flutter_web3.dart';
 
 import '../../../flutter_wallet_connect/flutter_wallet_connect.dart';
 import '../../constants/constants.dart';
+import '../application/application_cubit.dart';
 
 part 'web3_state.dart';
 
@@ -80,5 +83,31 @@ class Web3Cubit extends Cubit<Web3State> {
       'open': web3ModalState?.open,
       'selectedNetworkId': web3ModalState?.selectedNetworkId,
     }}');
+  }
+
+  Future<void> buyByUSDT(num amount) async {
+    final ERC20 usdt = await walletConnect.usdtSmartContract();
+    final ICO ico = await walletConnect.icoSmartContract();
+    try{
+      GetIt.I<ApplicationCubit>().setLoading(true);
+      final dynamic approveTx = await usdt.approve('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', amount.toString());
+      final dynamic buyTx = await ico.buyByUSDT(amount.toString());
+      GetIt.I<ApplicationCubit>().setLoading(false);
+    }catch(e){
+      GetIt.I<ApplicationCubit>().setLoading(false);
+      logger.e('buy error: $e');
+    }
+  }
+
+    Future<void> buyByEther(num amount) async {
+    final ICO ico = await walletConnect.icoSmartContract();
+    try{
+      GetIt.I<ApplicationCubit>().setLoading();
+      final dynamic buyTx = await ico.buyByEther(amount.toString());
+      GetIt.I<ApplicationCubit>().setLoading(false);
+    }catch(e){
+      GetIt.I<ApplicationCubit>().setLoading(false);
+      logger.e('buy error: $e');
+    }
   }
 }

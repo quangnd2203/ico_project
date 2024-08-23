@@ -1,14 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
-
-@JS('window')
-import 'package:js/js.dart';
-import 'package:js/js_util.dart';
-
+part of 'flutter_wallet_connect.dart';
 
 @JS()
 @anonymous
-class ContractParams {
-  external factory ContractParams({
+class ContractOptions{
+    external factory ContractOptions({
     required dynamic walletConnectProvider,
     required String contractAddress,
   });
@@ -18,25 +14,26 @@ class ContractParams {
 }
 
 @JS('ERC20')
-class _ERC20{
-  external _ERC20(ContractParams options);
-  external dynamic get provider;
+@anonymous
+class _ERC20 {
+  external _ERC20(ContractOptions options);
+
+  external dynamic get provide;
+
   external Future<void> init();
+
+  external Future<dynamic> approve(String spender, String amount);
+
   external Future<void> importToken();
-  external Future<dynamic> approve(String spender, num amount);
 }
 
-class ERC20 implements _ERC20{
+class ERC20 implements _ERC20 {
+  ERC20(ContractOptions options) : instance = _ERC20(options);
 
-  ERC20(ContractParams options) : instance = _ERC20(options);
   final _ERC20 instance;
 
-    
   @override
-  dynamic get provider => instance.provider;
-
-  @override
-  Future<dynamic> approve(String spender, num amount) {
+  Future<dynamic> approve(String spender, String amount) {
     return promiseToFuture<dynamic>(instance.approve(spender, amount));
   }
 
@@ -48,6 +45,9 @@ class ERC20 implements _ERC20{
   @override
   Future<void> init() {
     return promiseToFuture<void>(instance.init());
+
   }
 
+  @override
+  get provide => instance.provide;
 }

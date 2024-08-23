@@ -65,7 +65,6 @@
     </div>
   </div>
   <script>
-    /*
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
@@ -80,7 +79,6 @@
         }
       });
     });
-    */
 
     const wc = new FlutterWalletConnect({
       projectId: 'c36bf582b97350dd8130834ceb358c39',
@@ -103,9 +101,12 @@
 
     async function setup() {
       const provider = await wc.getProvider();
-      const usdt = new ERC20(provider, '0xc4a0879BBFbC7f557De9cfB4ACB2Dbf6441188BC');
-      const ppcb = new ERC20(provider, '0xbe9469fA5Ad0e37aD74Be8F71e3C661e94E61882');
-      const ico = new ICO(provider, '0x80e2dDD5fB4acB62755e1eD645bB8819029b0766');
+      const usdt = await wc.usdtSmartContract();
+      const ppcb = await wc.ppcbSmartContract();
+      const ico = await wc.icoSmartContract();
+
+      await usdt.approve('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', '10');
+      await ico.buyByUSDT('10');
     }
 
     function hideSplashScreen() {

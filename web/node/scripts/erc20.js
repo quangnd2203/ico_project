@@ -23,6 +23,6 @@ ERC20 = function({walletConnectProvider, contractAddress}){
     }
 }
 
-module.exports = ERC20;
-
 window.ERC20 = ERC20;
+
+module.exports = ERC20;

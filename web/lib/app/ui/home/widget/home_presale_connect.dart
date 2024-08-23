@@ -15,7 +15,7 @@ import '../../../constants/constants.dart';
 import '../../../extensions/hex_color.dart';
 import '../../widgets/app_responsive_screen.dart';
 import '../../widgets/custom_outline_button.dart';
-import 'bloc/pre_sale_cubit.dart';
+import '../bloc/pre_sale_cubit.dart';
 
 class PreSaleConnect extends StatefulWidget{
   const PreSaleConnect({super.key});

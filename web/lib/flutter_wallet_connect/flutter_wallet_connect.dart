@@ -10,6 +10,8 @@ part 'connect_wallet_info.dart';
 part 'ether_store_state.dart';
 part 'provider.dart';
 part 'web3modal_state.dart';
+part 'erc20.dart';
+part 'ico.dart';
 
 @JS('FlutterWalletConnect')
 class _FlutterWalletConnect {
@@ -29,6 +31,10 @@ class _FlutterWalletConnect {
   external void subscribeWalletInfo(void Function(ConnectWalletInfo?) callback);
   external void subscribeProvider(void Function(EthersStoreState?) callback);
   external void subscribeState(void Function(Web3ModalState?) callback);
+  external Future<dynamic> getProvider();
+  external Future<ICO> icoSmartContract();
+  external Future<ERC20> usdtSmartContract();
+  external Future<ERC20> ppcbSmartContract();
 }
 
 class FlutterWalletConnect implements _FlutterWalletConnect {
@@ -97,6 +103,26 @@ class FlutterWalletConnect implements _FlutterWalletConnect {
   @override
   Web3ModalState getState() {
     return instance.getState();
+  }
+  
+  @override
+  Future<dynamic> getProvider() {
+    return promiseToFuture<dynamic>(instance.getProvider());
+  }
+  
+  @override
+  Future<ICO> icoSmartContract() {
+    return promiseToFuture<ICO>(instance.icoSmartContract());
+  }
+  
+  @override
+  Future<ERC20> ppcbSmartContract() {
+    return promiseToFuture<ERC20>(instance.ppcbSmartContract());
+  }
+  
+  @override
+  Future<ERC20> usdtSmartContract() {
+    return promiseToFuture<ERC20>(instance.usdtSmartContract());
   }
 }
 

@@ -1,5 +1,4 @@
 const { createWeb3Modal, defaultConfig } = require('@web3modal/ethers');
-const { BrowserProvider, Contract, formatUnits } = require('ethers');
 const ICO = require('./ico.js');
 const ERC20 = require('./erc20.js');
 

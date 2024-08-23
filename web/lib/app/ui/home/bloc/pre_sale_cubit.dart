@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../../generated/l10n.dart';
-import '../../../../blocs/application/application_cubit.dart';
-import '../../../../blocs/web3/web3_cubit.dart';
+import '../../../../generated/l10n.dart';
+import '../../../blocs/application/application_cubit.dart';
+import '../../../blocs/web3/web3_cubit.dart';
 
 part 'pre_sale_state.dart';
 

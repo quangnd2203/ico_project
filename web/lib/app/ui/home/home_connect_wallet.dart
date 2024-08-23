@@ -7,7 +7,7 @@ import '../../blocs/web3/web3_cubit.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
 import '../widgets/custom_outline_button.dart';
-import 'widget/bloc/pre_sale_cubit.dart';
+import 'bloc/pre_sale_cubit.dart';
 
 class HomeConnectWallet extends StatefulWidget {
   const HomeConnectWallet({super.key});

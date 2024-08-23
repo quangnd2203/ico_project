@@ -9,7 +9,7 @@ import '../../../constants/app_images.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../../constants/app_values.dart';
 import '../../ui.dart';
-import 'bloc/purchase_packages_cubit.dart';
+import '../bloc/purchase_packages_cubit.dart';
 import 'home_banner_icon_animation.dart';
 
 class HomePurchasePackages extends StatefulWidget {
@@ -36,7 +36,7 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
     return SizedBox(
       width: MediaQuery.of(context).size.width - 100,
       child: Stack(
-        children: [
+        children: <Widget>[
           Positioned(
             top: 200,
             right: 0,
@@ -159,7 +159,13 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
           const Spacer(),
           CustomOutlinedButton(
             title: 'BUY NOW (${item['value']} ${item['type']})',
-            action: () {},
+            action: () {
+              if(item['type'] == 'USDT'){
+                _purchasePackagesCubit.buyByUSDT(item['value'] as num);
+              }else{
+                _purchasePackagesCubit.buyByEther(item['value'] as num);
+              }
+            },
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
             radius: 10,
             backgroundColor: AppColors.warring.shade300,
