@@ -13,3 +13,27 @@ class ICO{
 
   external Future<dynamic> buyByEther(String amount);
 }
+
+class ICOImp implements ICO {
+  ICOImp(this.instance);
+
+  final ICO instance;
+
+  @override
+  Future<dynamic> buyByEther(String amount) {
+    return promiseToFuture<dynamic>(instance.buyByEther(amount));
+  }
+
+  @override
+  Future<dynamic> buyByUSDT(String amount) {
+    return promiseToFuture<dynamic>(instance.buyByUSDT(amount));
+  }
+
+  @override
+  Future<void> init() {
+    return promiseToFuture<void>(instance.init());
+  }
+
+  @override
+  get provide => instance.provide;
+}

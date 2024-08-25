@@ -38,7 +38,8 @@ class _FlutterWalletConnect {
 }
 
 class FlutterWalletConnect implements _FlutterWalletConnect {
-  FlutterWalletConnect(FlutterWalletConnectOptions options) : instance = _FlutterWalletConnect(options);
+  FlutterWalletConnect(FlutterWalletConnectOptions options)
+      : instance = _FlutterWalletConnect(options);
   final _FlutterWalletConnect instance;
 
   @override
@@ -104,25 +105,28 @@ class FlutterWalletConnect implements _FlutterWalletConnect {
   Web3ModalState getState() {
     return instance.getState();
   }
-  
+
   @override
   Future<dynamic> getProvider() {
     return promiseToFuture<dynamic>(instance.getProvider());
   }
-  
+
   @override
-  Future<ICO> icoSmartContract() {
-    return promiseToFuture<ICO>(instance.icoSmartContract());
+  Future<ICO> icoSmartContract() async {
+    final ICO ico = await promiseToFuture<ICO>(instance.icoSmartContract());
+    return ICOImp(ico);
   }
-  
+
   @override
-  Future<ERC20> ppcbSmartContract() {
-    return promiseToFuture<ERC20>(instance.ppcbSmartContract());
+  Future<ERC20> ppcbSmartContract() async {
+    final ERC20 ppcb = await promiseToFuture<ERC20>(instance.ppcbSmartContract());
+    return ERC20Imp(ppcb);
   }
-  
+
   @override
-  Future<ERC20> usdtSmartContract() {
-    return promiseToFuture<ERC20>(instance.usdtSmartContract());
+  Future<ERC20> usdtSmartContract() async {
+    final ERC20 usdt = await promiseToFuture(instance.usdtSmartContract());
+    return ERC20Imp(usdt);
   }
 }
 

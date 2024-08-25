@@ -1,8 +1,10 @@
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
+import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 // import 'package:flutter_web3/flutter_web3.dart';
 
 import '../../../flutter_wallet_connect/flutter_wallet_connect.dart';
@@ -91,6 +93,7 @@ class Web3Cubit extends Cubit<Web3State> {
     try{
       GetIt.I<ApplicationCubit>().setLoading(true);
       final dynamic approveTx = await usdt.approve('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', amount.toString());
+      await Future.delayed(const Duration(seconds: 5));
       final dynamic buyTx = await ico.buyByUSDT(amount.toString());
       GetIt.I<ApplicationCubit>().setLoading(false);
     }catch(e){

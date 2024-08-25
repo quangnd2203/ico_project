@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String BASE_URL_DEV = 'http://192.168.1.14:3000';
+  static const String BASE_URL_DEV = 'http://127.0.0.1:3000';
   static const String BASE_URL_PROD = 'api.ppcb.io';
 
   static const String BASE_URL = 'https://m03v1.wiremockapi.cloud';
