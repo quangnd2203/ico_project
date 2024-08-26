@@ -28,6 +28,7 @@ class Web3Cubit extends Cubit<Web3State> {
     walletConnect.subscribeWalletInfo(onWalletInfo);
     walletConnect.subscribeProvider(onProvider);
     walletConnect.subscribeState(onWeb3ModalState);
+    getAccount();
   }
   late final FlutterWalletConnect walletConnect;
 
@@ -93,7 +94,6 @@ class Web3Cubit extends Cubit<Web3State> {
     try{
       GetIt.I<ApplicationCubit>().setLoading(true);
       final dynamic approveTx = await usdt.approve('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', amount.toString());
-      await Future.delayed(const Duration(seconds: 5));
       final dynamic buyTx = await ico.buyByUSDT(amount.toString());
       GetIt.I<ApplicationCubit>().setLoading(false);
     }catch(e){

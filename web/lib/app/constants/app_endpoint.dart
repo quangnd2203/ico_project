@@ -1,10 +1,10 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String BASE_URL_DEV = 'http://127.0.0.1:3000';
-  static const String BASE_URL_PROD = 'api.ppcb.io';
+  // static const String BASE_URL_DEV = 'http://127.0.0.1:3000';
+  // static const String BASE_URL_PROD = 'api.ppcb.io';
 
-  static const String BASE_URL = 'https://m03v1.wiremockapi.cloud';
+  // static const String BASE_URL = 'https://m03v1.wiremockapi.cloud';
   static const String API_KEY = 'O5my8JAR4D5CGVKppScL8KMBhlN_KfVn';
   static const String TEST_POST = '/json';
   static const String PURCHASE_PACKAGES = '/api/purchase_packages';

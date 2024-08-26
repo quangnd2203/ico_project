@@ -2,6 +2,7 @@
 
 import 'package:dio/browser.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import '../constants/constants.dart';
 import 'utils.dart';
@@ -26,7 +27,7 @@ class AppClients extends DioForBrowser {
   static const String PUT = 'PUT';
   static const String DELETE = 'DELETE';
 
-  static AppClients baseInstance = AppClients(baseUrl: AppEndpoint.BASE_URL_DEV);
+  static AppClients baseInstance = AppClients(baseUrl: dotenv.env['BASE_URL']!);
   static Logger logger = Logger();
 
   Future<void> _requestInterceptor(RequestOptions options, RequestInterceptorHandler handler) async {
