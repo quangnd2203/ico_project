@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../blocs/web3/web3_cubit.dart';
+import '../../constants/constants.dart';
 import '../navigation/widget/app_navigation_bar.dart';
 import '../ui.dart';
 import 'widget/home_purchase_packages.dart';
@@ -54,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
 
   @override
   Widget buildDesktop(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -62,11 +66,15 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
             isDynamicHeigh: true,
             child: Column(
               children: <Widget>[
-                AppNavigationBar(),
-                SizedBox(
+                const AppNavigationBar(),
+                const SizedBox(
                   height: 16,
                 ),
-                HomePurchasePackages(),
+                buildImportTokens(),
+                const SizedBox(
+                  height: 16,
+                ),
+                const HomePurchasePackages(),
               ],
             ),
           ),
@@ -84,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
 
   @override
   Widget buildMobile(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -92,11 +100,15 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
             isDynamicHeigh: true,
             child: Column(
               children: <Widget>[
-                AppNavigationBar(),
-                SizedBox(
+                const AppNavigationBar(),
+                const SizedBox(
                   height: 8,
                 ),
-                HomePurchasePackages(),
+                buildImportTokens(),
+                const SizedBox(
+                  height: 8,
+                ),
+                const HomePurchasePackages(),
               ],
             ),
           ),
@@ -108,5 +120,21 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
   @override
   Widget buildTablet(BuildContext context) {
     return buildDesktop(context);
+  }
+
+  Widget buildImportTokens() {
+    return CustomOutlinedButton(
+      title: 'Import Tokens',
+      action: () async {
+        (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
+        (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+      },
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+      radius: 10,
+      backgroundColor: AppColors.primary,
+      borderColor: AppColors.primary,
+      textColor: AppColors.white,
+      textStyle: AppTextStyles.getBaseStyle(AppTextStyles.medium),
+    );
   }
 }

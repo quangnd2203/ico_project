@@ -23,7 +23,7 @@ class ERC20 {
 
   external Future<dynamic> approve(String spender, String amount);
 
-  external Future<void> importToken();
+  external Future<void> importTokenToWallet();
 }
 
 class ERC20Imp implements ERC20 {
@@ -37,8 +37,8 @@ class ERC20Imp implements ERC20 {
   }
 
   @override
-  Future<void> importToken() {
-    return promiseToFuture<void>(instance.importToken());
+  Future<void> importTokenToWallet() {
+    return promiseToFuture<void>(instance.importTokenToWallet());
   }
 
   @override
