@@ -17,7 +17,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
     depends_on:
-      - mongo-express
+      - boilerplate-mongo
     command: > 
       bash -c "npm install && npm run start"
     networks:
