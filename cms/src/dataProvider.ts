@@ -1,18 +1,15 @@
 import simpleRestProvider from 'ra-data-simple-rest';
 import { DataProvider } from 'react-admin';
 import axios from 'axios';
-import 'dotenv'
-
-const BASE_URL = 'http://100.28.21.190:3000/api';
 
 const apiClient = axios.create({
-    baseURL: BASE_URL,
+    baseURL:  process.env.REACT_APP_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-const baseDataProvider = simpleRestProvider(BASE_URL!);
+const baseDataProvider = simpleRestProvider(process.env.REACT_APP_BASE_URL!);
 
 export const dataProvider: DataProvider = {
     ...baseDataProvider,

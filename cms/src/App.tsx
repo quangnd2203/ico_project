@@ -10,15 +10,17 @@ import ListPurchasePackages from './components/purchase_packages/List.PurchasePa
 import CreatePurchasePackage from './components/purchase_packages/Create.PurchasePackages';
 import EditPurchasePackage from './components/purchase_packages/Edit.PurchasePackages';
 
-
-export const App = () => (
-    <Admin
-        layout={Layout}
-        dataProvider={dataProvider}
-        authProvider={authProvider}
-    >
-        <Resource name='users' create={CreateUser} list={ListUsers} edit={EditUser}/>
-        <Resource name='purchase_packages' list={ListPurchasePackages} create={CreatePurchasePackage} edit={EditPurchasePackage}/>
-    </Admin>
-);
+export const App = () => {
+    console.log(process.env.REACT_APP_BASE_URL);
+    return (
+        <Admin
+            layout={Layout}
+            dataProvider={dataProvider}
+            authProvider={authProvider}
+        >
+            <Resource name='users' create={CreateUser} list={ListUsers} edit={EditUser}/>
+            <Resource name='purchase_packages' list={ListPurchasePackages} create={CreatePurchasePackage} edit={EditPurchasePackage}/>
+        </Admin>
+    )
+};
 
