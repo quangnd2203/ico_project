@@ -161,9 +161,9 @@ class _HomePurchasePackagesState extends State<HomePurchasePackages> with AppRes
             title: 'BUY NOW (${item['value']} ${item['type']})',
             action: () {
               if(item['type'] == 'USDT'){
-                _purchasePackagesCubit.buyByUSDT(item['value'] as num);
+                _purchasePackagesCubit.buyByUSDT(item['value'] as num, context);
               }else{
-                _purchasePackagesCubit.buyByEther(item['value'] as num);
+                _purchasePackagesCubit.buyByEther(item['value'] as num, context);
               }
             },
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),

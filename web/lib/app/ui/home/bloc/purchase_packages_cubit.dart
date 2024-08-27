@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -24,11 +27,11 @@ class PurchasePackagesCubit extends Cubit<PurchasePackagesState> {
     }
   }
 
-  Future<void> buyByUSDT(num amount) async {
-    web3Cubit.buyByUSDT(amount);
+  Future<void> buyByUSDT(num amount, BuildContext context) async {
+    web3Cubit.buyByUSDT(amount, context);
   }
 
-  Future<void> buyByEther(num amount) async {
-    web3Cubit.buyByEther(amount);
+  Future<void> buyByEther(num amount, BuildContext context) async {
+    web3Cubit.buyByEther(amount, context);
   }
 }

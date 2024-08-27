@@ -1,5 +1,5 @@
-
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
@@ -61,7 +61,7 @@ class Web3Cubit extends Cubit<Web3State> {
     if (walletInfo == null) {
       walletConnect.disconnect();
       emit(const Web3Initial());
-    }else{
+    } else {
       await getAccount();
     }
   }
@@ -88,29 +88,49 @@ class Web3Cubit extends Cubit<Web3State> {
     }}');
   }
 
-  Future<void> buyByUSDT(num amount) async {
-    final ERC20 usdt = await walletConnect.usdtSmartContract();
-    final ICO ico = await walletConnect.icoSmartContract();
-    try{
+  Future<void> buyByUSDT(num amount, BuildContext context) async {
+    try {
+      final ERC20 usdt = await walletConnect.usdtSmartContract();
+      final ICO ico = await walletConnect.icoSmartContract();
       GetIt.I<ApplicationCubit>().setLoading(true);
       final dynamic approveTx = await usdt.approve('0x80e2dDD5fB4acB62755e1eD645bB8819029b0766', amount.toString());
       final dynamic buyTx = await ico.buyByUSDT(amount.toString());
       GetIt.I<ApplicationCubit>().setLoading(false);
-    }catch(e){
+      GetIt.I<ApplicationCubit>().notification(
+        context,
+        title: 'Purchase successful, your transaction is being processed',
+        isFailed: false,
+      );
+    } catch (e) {
       GetIt.I<ApplicationCubit>().setLoading(false);
       logger.e('buy error: $e');
+      GetIt.I<ApplicationCubit>().notification(
+        context,
+        des: e.toString(),
+        isFailed: false,
+      );
     }
   }
 
-    Future<void> buyByEther(num amount) async {
-    final ICO ico = await walletConnect.icoSmartContract();
-    try{
+  Future<void> buyByEther(num amount, BuildContext context) async {
+    try {
+      final ICO ico = await walletConnect.icoSmartContract();
       GetIt.I<ApplicationCubit>().setLoading();
       final dynamic buyTx = await ico.buyByEther(amount.toString());
       GetIt.I<ApplicationCubit>().setLoading(false);
-    }catch(e){
+      GetIt.I<ApplicationCubit>().notification(
+        context,
+        title: 'Purchase successful, your transaction is being processed',
+        isFailed: false,
+      );
+    } catch (e) {
       GetIt.I<ApplicationCubit>().setLoading(false);
       logger.e('buy error: $e');
+      GetIt.I<ApplicationCubit>().notification(
+        context,
+        des: e.toString(),
+        isFailed: false,
+      );
     }
   }
 }
