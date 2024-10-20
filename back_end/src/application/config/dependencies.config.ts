@@ -40,6 +40,12 @@ import IPurchasePackageController from "src/interface/controllers/purchase_packa
 import PurchasePackageController from "../controllers/purchase_package.controllers.js";
 import IGetPurchasePackagesMapper from "src/interface/mappers/get_purchase_packages.mappers.js";
 import GetPurchasePackagesMapper from "src/domain/mappers/get_purchase_packages.mappers.js";
+import IFaucetController from "src/interface/controllers/faucet.controller.js";
+import FaucetController from "../controllers/faucet.controller.js";
+import FaucetUsecases from "src/infrastructure/usercases/faucet.usecases.js";
+import IFaucetUsecases from "src/interface/usercases/faucet.usecases.js";
+import FaucetSmartContractRepository from "src/infrastructure/repositories/faucet_smart_contract.repositories.js";
+import IFaucetSmartContractRepository from "src/interface/repositories/faucet_smart_contract.repositories.js";
 
 export const container = new Container();
 
@@ -54,6 +60,7 @@ export function inject() {
 function injectControllers(){
     container.bind<IUsersController>(TYPES.controller.IUsersController).to(UsersController);
     container.bind<IPurchasePackageController>(TYPES.controller.IPurchasePackageController).to(PurchasePackageController);
+    container.bind<IFaucetController>(TYPES.controller.IFaucetController).to(FaucetController);
 }
 
 /* Use Cases */
@@ -69,12 +76,15 @@ function injectUseCases(){
     container.bind<IGetAllPurchasePackageUsecase>(TYPES.useCases.IGetAllPurchasePackageUsecase).to(GetAllPurchasePackageUsecase);
     container.bind<IDeletePurchasePackageUsecase>(TYPES.useCases.IDeletePurchasePackageUsecase).to(DeletePurchasePackageUsecase);
     container.bind<IUpdatePurchasePackageUsecase>(TYPES.useCases.IUpdatePurchasePackageUsecase).to(UpdatePurchasePackageUsecase);
+
+    container.bind<IFaucetUsecases>(TYPES.useCases.IFaucetUsecases).to(FaucetUsecases);
 }
 
 /* Repositories */
 function injectRepositories(){
     container.bind<IUsersRepository>(TYPES.repositories.IUsersRepository).to(UsersRepository);
     container.bind<IPurchasePackageRepository>(TYPES.repositories.IPurchasePackageRepository).to(PurchasePackageRepository);
+    container.bind<IFaucetSmartContractRepository>(TYPES.repositories.IFaucetSmartContractRepository).to(FaucetSmartContractRepository);
 }
 
 /* Mappers */

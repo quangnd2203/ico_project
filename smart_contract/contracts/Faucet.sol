@@ -62,7 +62,7 @@ contract Faucet is IFaucet, Ownable(msg.sender){
     }
 
     function _checkDayValid(address _receiver) internal view returns (bool) {
-    return lastReceiveTime[msg.sender] == 0 || block.timestamp - lastReceiveTime[_receiver] >= 1 days;
+        return lastReceiveTime[_receiver] == 0 || block.timestamp - lastReceiveTime[_receiver] >= 1 days;
     }
 
     function _setDayValid(address _receiver) internal {

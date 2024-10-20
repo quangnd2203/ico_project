@@ -5,12 +5,52 @@
     "title": "API Documentation",
     "description": "API description in Markdown."
   },
-  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
+    "/api/faucet": {
+      "post": {
+        "tags": [
+          "Faucet"
+        ],
+        "summary": "Post faucet",
+        "description": "Post faucet",
+        "operationId": "postFaucet",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post faucet",
+            "content": {
+              "application/json": {
+                "application/json": {
+                  "code": 200,
+                  "message": null,
+                  "response": "transaction hash"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users": {
       "post": {
         "tags": [

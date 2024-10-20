@@ -1,5 +1,3 @@
 FROM node:slim
 
 WORKDIR /app
-
-EXPOSE 3001

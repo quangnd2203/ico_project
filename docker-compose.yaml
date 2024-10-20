@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: .docker/back_end.DockerFile
     ports: 
-      - 3000:3000
+      - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
       - ./back_end:/app
     environment:
@@ -16,6 +16,10 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      BSCSCAN_API_KEY: ${BSCSCAN_API_KEY}
+      OWNER_PRIVATE_KEY: ${OWNER_PRIVATE_KEY}
+      FAUCET_ADDRESS: ${FAUCET_ADDRESS}
+      RPC_URL: ${RPC_URL}
     depends_on:
       - boilerplate-mongo
     command: > 

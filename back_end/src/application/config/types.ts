@@ -2,6 +2,7 @@ const TYPES = {
     controller: {
         IUsersController: Symbol.for('IUsersController'),
         IPurchasePackageController: Symbol.for('IPurchasePackageController'),
+        IFaucetController: Symbol.for('IFaucetController'),
     },
     useCases: {
         ICreateUserUseCase: Symbol.for('ICreateUserUseCase'),
@@ -14,10 +15,12 @@ const TYPES = {
         IDeletePurchasePackageUsecase: Symbol.for('IDeletePurchasePackageUsecase'),
         IUpdatePurchasePackageUsecase: Symbol.for('IUpdatePurchasePackageUsecase'),
         IGetAllPurchasePackageUsecase: Symbol.for('IGetAllPurchasePackageUsecase'),
+        IFaucetUsecases: Symbol.for('IFaucetUsecases'),
     },
     repositories: {
         IUsersRepository: Symbol.for('IUsersRepository'),
         IPurchasePackageRepository: Symbol.for('IPurchasePackageRepository'),
+        IFaucetSmartContractRepository: Symbol.for('IFaucetSmartContractRepository'),
     },
     mappers: {
         IUserMapper: Symbol.for('IUserMapper'),
