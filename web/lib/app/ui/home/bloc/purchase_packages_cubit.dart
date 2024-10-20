@@ -34,4 +34,15 @@ class PurchasePackagesCubit extends Cubit<PurchasePackagesState> {
   Future<void> buyByEther(num amount, BuildContext context) async {
     web3Cubit.buyByEther(amount, context);
   }
+
+  Future<void> faucet(BuildContext context) async {
+    GetIt.I<ApplicationCubit>().setLoading();
+    final NetworkState<dynamic> networkState = await repository.faucet(web3Cubit.state.account!);
+    GetIt.I<ApplicationCubit>().setLoading(false);
+    if (networkState.isSuccess) {
+      GetIt.I<ApplicationCubit>().notification(context, title: 'Faucet success');
+    }else{
+      GetIt.I<ApplicationCubit>().notification(context, title: networkState.message ?? 'Faucet fail', isFailed: true);
+    }
+  }
 }

@@ -37,6 +37,27 @@ class PurchasePackagesRepository {
     }
   }
 
+    Future<NetworkState<dynamic>> faucet(String address) async {
+    // final bool isDisconnect = await WifiService.isDisconnect();
+    // if (isDisconnect) {
+    //   return NetworkState< List<Map<String, dynamic>>>.withDisconnect();
+    // }
+    try {
+      final Response<dynamic> response = await AppClients.baseInstance.post(
+        AppEndpoint.FAUCET,
+        data: {
+          'address': address,
+        }
+      );
+      return NetworkState<dynamic>(
+        status: AppEndpoint.SUCCESS,
+        data: response.data,
+      );
+    } on DioError catch (e) {
+      return NetworkState<dynamic>.withError(e);
+    }
+  }
+
   // Future<NetworkState<String>> login(String diaCode, String phoneNumber, String password) async {
   //   final bool isDisconnect = await WifiService.isDisconnect();
   //   if (isDisconnect) {

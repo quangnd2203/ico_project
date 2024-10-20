@@ -6,6 +6,7 @@ import '../../blocs/web3/web3_cubit.dart';
 import '../../constants/constants.dart';
 import '../navigation/widget/app_navigation_bar.dart';
 import '../ui.dart';
+import 'bloc/purchase_packages_cubit.dart';
 import 'widget/home_purchase_packages.dart';
 import 'widget/top_background.dart';
 
@@ -123,18 +124,38 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
   }
 
   Widget buildImportTokens() {
-    return CustomOutlinedButton(
-      title: 'Import Tokens',
-      action: () async {
-        (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
-        (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
-      },
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-      radius: 10,
-      backgroundColor: AppColors.primary,
-      borderColor: AppColors.primary,
-      textColor: AppColors.white,
-      textStyle: AppTextStyles.getBaseStyle(AppTextStyles.medium),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        CustomOutlinedButton(
+          title: 'Import Tokens',
+          action: () async {
+            (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
+            (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+          },
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+          radius: 10,
+          backgroundColor: AppColors.primary,
+          borderColor: AppColors.primary,
+          textColor: AppColors.white,
+          textStyle: AppTextStyles.getBaseStyle(AppTextStyles.medium),
+        ), 
+        const SizedBox(width: 16),
+        CustomOutlinedButton(
+          title: 'Faucet',
+          action: () async {
+            GetIt.I<PurchasePackagesCubit>().faucet(context);
+            // (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
+            // (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+          },
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+          radius: 10,
+          backgroundColor: AppColors.warring,
+          borderColor: AppColors.warring,
+          textColor: AppColors.white,
+          textStyle: AppTextStyles.getBaseStyle(AppTextStyles.medium),
+        )
+      ],
     );
   }
 }

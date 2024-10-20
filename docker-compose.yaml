@@ -87,7 +87,8 @@ services:
       - ./web/:/web
     tty: true
     environment: 
-      - TZ=Asia/HoChiMinh
+      TZ: Asia/HoChiMinh
+      API_URL: ${API_URL}
     networks:
       - api-network
 

@@ -8,6 +8,7 @@ class AppEndpoint {
   static const String API_KEY = 'O5my8JAR4D5CGVKppScL8KMBhlN_KfVn';
   static const String TEST_POST = '/json';
   static const String PURCHASE_PACKAGES = '/api/purchase_packages';
+  static const String FAUCET = '/api/faucet';
 
   static const int connectionTimeout = 30000;
   static const int receiveTimeout = 30000;
