@@ -5,7 +5,7 @@ const EditPurchasePackage = (props: JSX.IntrinsicAttributes & CreateProps<any, E
     <Edit {...props}>
         <SimpleForm>
             <TextInput source='name' validate={required()} />
-            <NumberInput source='value' min={0.1} validate={required()} />
+            <NumberInput source='value' min={0.01} validate={required()} />
             <NumberInput source='tokenReceive' min={1} validate={required()} />
             <NumberInput source='bonus' />
             <SelectInput source='type' validate={required()} choices={[
