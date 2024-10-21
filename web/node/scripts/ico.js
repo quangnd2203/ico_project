@@ -11,7 +11,7 @@ ICO = function({walletConnectProvider, contractAddress}){
 
     this.buyByUSDT = async function(amount){
 
-        return this.contract.buyByUSDT(ethers.parseUnits(amount, 'ether'), {gasLimit: 100000,});
+        return this.contract.buyByUSDT(ethers.parseUnits(amount, 'ether'), {gasLimit: 300000,});
     }
 
     this.buyByEther = async function(amount){

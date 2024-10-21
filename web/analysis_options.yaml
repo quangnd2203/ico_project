@@ -31,7 +31,8 @@ analyzer:
     deprecated_member_use_from_same_package: ignore
     # Turned off until null-safe rollout is complete.
     unnecessary_null_comparison: ignore
-  exclude:
+    unused_local_variable: ignore
+  exclude: ignore
     - "bin/cache/**"
     # Ignore protoc generated files
     - "dev/conductor/lib/proto/*"

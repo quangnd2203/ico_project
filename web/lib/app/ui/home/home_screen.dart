@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/blocs/application/application_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../blocs/web3/web3_cubit.dart';
@@ -130,8 +131,12 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
         CustomOutlinedButton(
           title: 'Import Tokens',
           action: () async {
-            (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
-            (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+            if(GetIt.I<Web3Cubit>().state is Web3Connected){
+              (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
+              (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+            }else{
+              GetIt.I<ApplicationCubit>().notification(context, title: 'Please connect wallet first');
+            }
           },
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
           radius: 10,
@@ -144,9 +149,11 @@ class _HomeScreenState extends State<HomeScreen> with AppResponsiveScreen {
         CustomOutlinedButton(
           title: 'Faucet',
           action: () async {
-            GetIt.I<PurchasePackagesCubit>().faucet(context);
-            // (await GetIt.I<Web3Cubit>().walletConnect.usdtSmartContract()).importTokenToWallet();
-            // (await GetIt.I<Web3Cubit>().walletConnect.ppcbSmartContract()).importTokenToWallet();
+            if(GetIt.I<Web3Cubit>().state is Web3Connected){
+              GetIt.I<PurchasePackagesCubit>().faucet(context);
+            }else{
+              GetIt.I<ApplicationCubit>().notification(context, title: 'Please connect wallet first');
+            }
           },
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
           radius: 10,
