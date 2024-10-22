@@ -83,7 +83,6 @@ services:
       dockerfile: .docker/web.DockerFile
     ports:
       - 80:80
-      - 443:80
     volumes: 
       - ./web/:/web
     tty: true
