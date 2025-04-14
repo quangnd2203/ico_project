@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import logger from './logger.config.js';
 
 export default async function connectDatabase(){
-    mongoose.connect('mongodb://boilerplate-mongo:27017/', {
+    mongoose.connect(process.env.DB_URL, {
         pass: 'password',
         user: 'root',
     }).then(() => {
