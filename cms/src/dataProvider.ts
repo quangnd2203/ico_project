@@ -3,13 +3,13 @@ import { DataProvider } from 'react-admin';
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL:  process.env.REACT_APP_BASE_URL,
+    baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-const baseDataProvider = simpleRestProvider(process.env.REACT_APP_BASE_URL!);
+const baseDataProvider = simpleRestProvider(import.meta.env.VITE_BASE_URL!);
 
 export const dataProvider: DataProvider = {
     ...baseDataProvider,
@@ -19,7 +19,7 @@ export const dataProvider: DataProvider = {
             page: params.pagination?.page,
             limit: params.pagination?.perPage,
             sortField: params.sort?.field,
-            sortOrder: params.sort?.order 
+            sortOrder: params.sort?.order
         };
         const response = await apiClient.get(`/${resource}`, { params: query });
         return {
